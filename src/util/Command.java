@@ -23,7 +23,7 @@ public enum Command {
     /**
      * Stores the description of a command
      */
-    final String description;
+    private final String description;
 
     Command(String description) {
         this.description = description;
