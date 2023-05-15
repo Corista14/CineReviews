@@ -32,7 +32,6 @@ public class Main {
         } while(!command.name().equals(Command.EXIT.name()));
     }
 
-
     private static void executeHelp() {
         for (Command command : Command.values()) {
             if (command != Command.UNKNOWN) {
