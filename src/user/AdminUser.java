@@ -5,4 +5,5 @@ package user;
  * @author Filipe Corista / João Rodrigues
  */
 public interface AdminUser extends User {
+
 }
