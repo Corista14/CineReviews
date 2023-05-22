@@ -6,4 +6,6 @@ package user;
  */
 public interface AdminUser extends User {
 
+    int getNumberOfPostedShows();
+
 }

@@ -1,7 +1,9 @@
 package show;
 
 import artist.Artist;
+import com.sun.source.tree.Tree;
 import review.Review;
+import review.ReviewComparator;
 
 import java.util.*;
 
@@ -11,7 +13,7 @@ public abstract class AbstractShow implements Show {
      * Map to store the reviews. Username -> Review
      */
     private final Map<String, Review> reviews;
-
+    private final Set<Review> sortedReviews;//added tree Set
     private final String title;
     private final String creatorName;
     private final String ageOfCertification;
@@ -37,6 +39,7 @@ public abstract class AbstractShow implements Show {
         this.yearOfRelease = yearOfRelease;
         this.genres = new ArrayList<>();
         this.cast = new ArrayList<>();
+        this.sortedReviews= new TreeSet<>(new ReviewComparator());
         addCast(cast);
         addGenres(genres);
         reviews = new HashMap<>();
@@ -44,8 +47,13 @@ public abstract class AbstractShow implements Show {
 
     @Override
     public Iterator<Review> getReviews() {
-        // TODO: NOT SORTED. SORT THIS
-        return reviews.values().iterator();
+        return sortedReviews.iterator();
+    }
+
+    @Override
+    public void addReview(Review review){
+        reviews.put(review.getReviewer().getName(),review);
+        sortedReviews.add(review);
     }
 
     private void addCast(Iterator<Artist> cast) {

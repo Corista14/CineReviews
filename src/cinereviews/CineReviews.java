@@ -1,7 +1,10 @@
 package cinereviews;
 
+import cinereviews.exceptions.NoUsersException;
 import show.Show;
 import user.User;
+import user.exceptions.UnknownUserTypeException;
+import user.exceptions.UserAlreadyExistsException;
 
 import java.util.Iterator;
 
@@ -12,21 +15,8 @@ import java.util.Iterator;
  * @author Filipe Corista / João Rodrigue
  */
 public interface CineReviews {
-    /**
-     * Creates a new OrdinaryUser with a given Username and type(Audience or Critic)
-     *
-     * @param type     the type of the user (Audience or Critic)
-     * @param userName the  userName and unique identifier of the user
-     */
-    void registerOrdinaryUser(String type, String userName);
 
-    /**
-     * Creates a new AdminUser with a given Username and password
-     *
-     * @param userName the  userName and unique identifier of the user
-     * @param password password of the account needed to execute commands using the account
-     */
-    void registerAdminUser(String userName, String password);
+    void registerUser(String type, String name, String password) throws UnknownUserTypeException, UserAlreadyExistsException;
 
     /**
      * Returns an iterator with all the users in the platform including admins

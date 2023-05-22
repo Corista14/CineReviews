@@ -1,0 +1,12 @@
+User filipe was registered as admin.
+User ja was registered as critic.
+User ja already exists!
+Admin filipe has uploaded 0 shows.
+User ja has posted 0 reviews.
+User alberto was registered as audience.
+User bartolomeu was registered as critic.
+User alberto has posted 0 reviews.
+User bartolomeu has posted 0 reviews.
+Admin filipe has uploaded 0 shows.
+User ja has posted 0 reviews.
+Bye!

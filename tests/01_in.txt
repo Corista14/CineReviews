@@ -1,0 +1,8 @@
+register admin filipe 1234
+register critic ja
+register critic ja
+users
+register audience alberto
+register critic bartolomeu
+users
+exit
