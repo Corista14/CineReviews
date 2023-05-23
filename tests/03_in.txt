@@ -1,0 +1,15 @@
+users
+register critic Roger.Ebert
+register audience Eve
+register audience Alice
+register audience Bob
+register admin Din.Grogu 1234
+register admin Din.Grogu 8987a
+register critic Din.Grogu
+register moderator Peter.Bradshaw
+register admin Roger.Ebert password
+register critic Peter.Bradshaw
+register admin Bo-Katan.Kryze 6373
+register admin Din.Djarin qwert
+users
+Exit

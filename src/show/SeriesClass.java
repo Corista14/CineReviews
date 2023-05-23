@@ -5,12 +5,12 @@ import user.AdminUser;
 
 import java.util.Iterator;
 
-public class MovieClass extends AbstractShow implements Movie {
+public class SeriesClass extends AbstractShow implements Series {
 
-    private int duration;
+    private int seasonNumber;
 
     /**
-     * Creates a new Movie
+     * Creates a new Series
      *
      * @param title              name of the show
      * @param creatorName        name of the creator of the show
@@ -19,13 +19,13 @@ public class MovieClass extends AbstractShow implements Movie {
      * @param genres             a collection of genres of the show
      * @param cast               a collection of the cast of the show
      */
-    public MovieClass(AdminUser uploader, String title, String creatorName, int duration, String ageOfCertification, int yearOfRelease, Iterator<String> genres, Iterator<Artist> cast) {
+    public SeriesClass(AdminUser uploader, String title, String creatorName, int seasonNumber, String ageOfCertification, int yearOfRelease, Iterator<String> genres, Iterator<Artist> cast) {
         super(uploader, title, creatorName, ageOfCertification, yearOfRelease, genres, cast);
-        this.duration = duration;
+        this.seasonNumber = seasonNumber;
     }
 
     @Override
-    public int getDuration() {
-        return duration;
+    public int getNumberOfSeasons() {
+        return seasonNumber;
     }
 }

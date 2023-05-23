@@ -8,4 +8,7 @@ public interface AdminUser extends User {
 
     int getNumberOfPostedShows();
 
+    boolean passwordMatches(String password);
+
+    void addedShow();
 }

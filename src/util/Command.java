@@ -6,13 +6,15 @@ package util;
  */
 public enum Command {
     REGISTER("registers a user in the system"),
-    USERS("list all registered users"),
+    USERS("lists all registered users"),
     MOVIE("uploads a new movie"),
     SERIES("uploads a new series"),
+    SHOWS("lists all shows"),
     ARTIST("adds bio information about an artist"),
     CREDITS("lists the bio and credits of an artist"),
-    REVIEWS("adds a review to a show"),
-    GENRE("lists the reviews of a show"),
+    REVIEW("adds a review to a show"),
+    REVIEWS("lists the reviews of a show"),
+    GENRE("lists shows of given genres"),
     RELEASED("lists shows released in a given year"),
     AVOIDERS("lists artists that have no common projects"),
     FRIENDS("lists artists that have more projects together"),

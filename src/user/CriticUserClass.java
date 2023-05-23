@@ -1,6 +1,6 @@
 package user;
 
-public class CriticUserClass extends AbstractOrdinaryUser {
+public class CriticUserClass extends AbstractOrdinaryUser implements CriticUser {
 
     /**
      * Creates a new Ordinary User, being Critic or Audience type

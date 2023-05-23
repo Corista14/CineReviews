@@ -1,12 +1,76 @@
-User filipe was registered as admin.
-User ja was registered as critic.
-User ja already exists!
-Admin filipe has uploaded 0 shows.
-User ja has posted 0 reviews.
-User alberto was registered as audience.
-User bartolomeu was registered as critic.
-User alberto has posted 0 reviews.
-User bartolomeu has posted 0 reviews.
-Admin filipe has uploaded 0 shows.
-User ja has posted 0 reviews.
+register - registers a user in the system
+users - lists all registered users
+movie - uploads a new movie
+series - uploads a new series
+shows - lists all shows
+artist - adds bio information about an artist
+credits - lists the bio and credits of an artist
+review - adds a review to a show
+reviews - lists the reviews of a show
+genre - lists shows of given genres
+released - lists shows released in a given year
+avoiders - lists artists that have no common projects
+friends - lists artists that have more projects together
+help - shows the available commands
+exit - terminates the execution of the program
+register - registers a user in the system
+users - lists all registered users
+movie - uploads a new movie
+series - uploads a new series
+shows - lists all shows
+artist - adds bio information about an artist
+credits - lists the bio and credits of an artist
+review - adds a review to a show
+reviews - lists the reviews of a show
+genre - lists shows of given genres
+released - lists shows released in a given year
+avoiders - lists artists that have no common projects
+friends - lists artists that have more projects together
+help - shows the available commands
+exit - terminates the execution of the program
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+register - registers a user in the system
+users - lists all registered users
+movie - uploads a new movie
+series - uploads a new series
+shows - lists all shows
+artist - adds bio information about an artist
+credits - lists the bio and credits of an artist
+review - adds a review to a show
+reviews - lists the reviews of a show
+genre - lists shows of given genres
+released - lists shows released in a given year
+avoiders - lists artists that have no common projects
+friends - lists artists that have more projects together
+help - shows the available commands
+exit - terminates the execution of the program
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+register - registers a user in the system
+users - lists all registered users
+movie - uploads a new movie
+series - uploads a new series
+shows - lists all shows
+artist - adds bio information about an artist
+credits - lists the bio and credits of an artist
+review - adds a review to a show
+reviews - lists the reviews of a show
+genre - lists shows of given genres
+released - lists shows released in a given year
+avoiders - lists artists that have no common projects
+friends - lists artists that have more projects together
+help - shows the available commands
+exit - terminates the execution of the program
 Bye!

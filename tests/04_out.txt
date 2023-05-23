@@ -1,0 +1,73 @@
+User Roger.Ebert was registered as critic.
+User Din.Grogu was registered as admin.
+User Peter.Bradshaw was registered as critic.
+User Bo-Katan.Kryze was registered as admin.
+User Din.Djarin was registered as admin.
+User Armorer was registered as admin.
+All registered users:
+Admin Armorer has uploaded 0 shows
+Admin Bo-Katan.Kryze has uploaded 0 shows
+Admin Din.Djarin has uploaded 0 shows
+Admin Din.Grogu has uploaded 0 shows
+User Peter.Bradshaw has posted 0 reviews
+User Roger.Ebert has posted 0 reviews
+No shows have been uploaded.
+Movie Dune (2019) was uploaded [5 new artists were created].
+Series Stranger Things (2016) was uploaded [4 new artists were created].
+Movie A Quiet Place (2018) was uploaded [6 new artists were created].
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Unknown command. Type help to see available commands.
+Series The Office (2005) was uploaded [5 new artists were created].
+Movie Zootropolis (2016) was uploaded [5 new artists were created].
+Movie Locke (2014) was uploaded [2 new artists were created].
+Movie Elysium (2013) was uploaded [3 new artists were created].
+Movie Star Wars: Episode VIII - The Last Jedi (2016) was uploaded [5 new artists were created].
+Movie Doctor Strange in the Multiverse of Madness (2022) was uploaded [5 new artists were created].
+Movie Paddington 2 (2017) was uploaded [9 new artists were created].
+Movie Monsters, Inc. (2001) was uploaded [5 new artists were created].
+Series Peaky Blinders (2013) was uploaded [6 new artists were created].
+Series The IT Crowd (2006) was uploaded [6 new artists were created].
+Series Sherlock (2010) was uploaded [4 new artists were created].
+All registered users:
+Admin Armorer has uploaded 0 shows
+Admin Bo-Katan.Kryze has uploaded 7 shows
+Admin Din.Djarin has uploaded 3 shows
+Admin Din.Grogu has uploaded 4 shows
+User Peter.Bradshaw has posted 0 reviews
+User Roger.Ebert has posted 0 reviews
+All shows:
+A Quiet Place; John Krasinski; 90; 16A; 2018; Drama; Emily Blunt; Millicent Simmonds; Noah Jupe
+Doctor Strange in the Multiverse of Madness; Sam Raimi; 126; 12A; 2022; Action; Benedict Cumberbatch; Chiwetel Ejiofor; Elizabeth Olsen
+Dune; Denis Villeneuve; 155; 12A; 2019; Action; Timothee Chalamet; Rebecca Ferguson; Zendaya
+Elysium; Neill Blomkamp; 109; 16A; 2013; Action; Matt Damon; Alice Braga
+Locke; Steven Knight; 145; 12A; 2014; Drama; Tom Hardy
+Monsters, Inc.; Pete Docter; 92; PG; 2001; Animation; John Goodman; Billy Crystal; Pete Docter
+Paddington 2; Paul King; 103; PG; 2017; Comedy; Ben Whishaw; Hugh Bonneville; Sally Hawkins
+Peaky Blinders; Steven Knight; 6; 16+; 2013; Crime; Cillian Murphy; Paul Anderson; Helen McCrory
+Sherlock; Mark Gatiss; 4; 16+; 2010; Crime; Benedict Cumberbatch; Martin Freeman; Una Stubbs
+Star Wars: Episode VIII - The Last Jedi; Rian Johnson; 152; 7A; 2016; Sci-Fi; Mark Hamill; Carrie Fisher; Daisy Ridley
+Stranger Things; The Duffer Brothers; 5; 15+; 2016; Horror; Millie Bobby Brown; Winona Ryder; David Harbour
+The IT Crowd; Graham Linehan; 6; 16+; 2006; Comedy; Chris ODowd; Richard Ayoade; Katherine Parkinson
+The Office; Greg Daniels; 9; 15+; 2005; Comedy; Steve Carell; Jenna Fischer; John Krasinski
+Zootropolis; Byron Howard; 108; 7A; 2016; Animation; Ginnifer Goodwin; Jason Bateman; Idris Elba
+Bye!

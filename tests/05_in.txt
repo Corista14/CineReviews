@@ -1,0 +1,100 @@
+register admin Din.Grogu 1234
+register admin Bo-Katan.Kryze 6373
+register admin Din.Djarin qwert
+register critic Roger.Ebert
+users
+shows
+series Din.Djarin qwert
+Stranger Things
+The Duffer Brothers
+5
+15+
+2016
+1
+Horror
+1
+Millie Bobby Brown
+movie Din.Djarin qwert
+A Quiet Place
+John Krasinski
+90
+16A
+2018
+1
+Drama
+2
+Emily Blunt
+John Krasinski
+movie Din.Djarin qwert
+The Death of Stalin
+Armando Iannucci
+107
+12A
+2017
+1
+Comedy
+1
+Steve Buscemi
+movie Alice 1234
+Dune
+Denis Villeneuve
+155
+12A
+2019
+1
+Action
+1
+Timothee Chalamet
+movie Roger.Ebert 1234
+Dune
+Denis Villeneuve
+155
+12A
+2019
+1
+Action
+1
+Timothee Chalamet
+movie Din.Grogu 4321
+Dune
+Denis Villeneuve
+155
+12A
+2019
+1
+Action
+1
+Timothee Chalamet
+movie Din.Grogu 1234
+Dune
+Denis Villeneuve
+155
+12A
+2019
+1
+Action
+1
+Timothee Chalamet
+movie Din.Grogu 1234
+Dune
+Denis Villeneuve
+155
+12A
+2019
+1
+Action
+1
+Timothee Chalamet
+series Din.Grogu 1234
+Dune
+Denis Villeneuve
+1
+12A
+2019
+1
+Action
+1
+Timothee Chalamet
+users
+shows
+EXIT

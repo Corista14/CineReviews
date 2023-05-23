@@ -1,16 +1,16 @@
 package cinereviews;
 
-import cinereviews.exceptions.NoUsersException;
+import artist.exceptions.AlreadyHasBioException;
+import show.exceptions.ShowAlreadyExistsException;
 import show.Show;
 import user.User;
-import user.exceptions.UnknownUserTypeException;
-import user.exceptions.UserAlreadyExistsException;
+import user.exceptions.*;
 
 import java.util.Iterator;
 
 /**
- * An interface for the System Cinereviews that manages all the other classes and keeps
- * colections of them allowing the execution of commands
+ * An interface for the System CineReviews that manages all the other classes and keeps
+ * collections of them allowing the execution of commands
  *
  * @author Filipe Corista / João Rodrigue
  */
@@ -31,7 +31,7 @@ public interface CineReviews {
      * list of genres and list of cast members, if any actors that are not already created are
      * present in the movie they too are added to the platform
      *
-     * @param AdminName        name of the admin that will add the movie
+     * @param adminName        name of the admin that will add the movie
      * @param password         password of the admin, an error message is sent if the password is wrong
      * @param title            title and unique identifier of the movie
      * @param director         name of the director of the movie
@@ -40,9 +40,11 @@ public interface CineReviews {
      * @param releaseYear      release year of the movie
      * @param genres           genres of the movie
      * @param cast             list of the names of the cast members
+     * @return number of added artist
      */
-    void addMovie(String AdminName, String password, String title,
-                  String director, int duration, String ageCertification, int releaseYear, Iterator<String> genres, Iterator<String> cast);
+    int addMovie(String adminName, String password, String title,
+                  String director, int duration, String ageCertification, int releaseYear, Iterator<String> genres, Iterator<String> cast)
+            throws NotAnAdminException, WrongPasswordException, ShowAlreadyExistsException;
 
     /**
      * Adds a new series to the platform, to do this an admin is needed and the respective password
@@ -59,9 +61,10 @@ public interface CineReviews {
      * @param releaseYear      year of release of the series
      * @param genres           list of genres of the series
      * @param cast             list of names of the cast members
+     * @return number of added artists
      */
-    void addSeries(String AdminName, String password, String title,
-                   String creator, int seasonAmount, String ageCertification, int releaseYear, Iterator<String> genres, Iterator<String> cast);
+    int addSeries(String AdminName, String password, String title,
+                   String creator, int seasonAmount, String ageCertification, int releaseYear, Iterator<String> genres, Iterator<String> cast) throws NotAnAdminException, WrongPasswordException, ShowAlreadyExistsException;
 
     /**
      * Lists all the shows that are stored in the platform by alphabetical order of the title
@@ -77,7 +80,7 @@ public interface CineReviews {
      * @param dateOfBirth  date of birth of the artist
      * @param placeOfBirth place of birth of the artist
      */
-    void addArtistBio(String name, String dateOfBirth, String placeOfBirth);
+    void addArtistBio(String name, String dateOfBirth, String placeOfBirth) throws AlreadyHasBioException;
 
     /**
      * Returns the artists date of birth if he has a bio
@@ -86,4 +89,12 @@ public interface CineReviews {
      * @return date of birth of the artist
      */
     String getArtistDateOfBirth(String artistName);
+
+    /**
+     * Returns the artists place of birth if he has a bio
+     *
+     * @param artistName name of the artist
+     * @return place of birth of the artist
+     */
+    String getArtistPlaceOfBirth(String artistName);
 }

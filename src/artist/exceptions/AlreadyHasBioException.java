@@ -1,4 +1,4 @@
-package artist.Exceptions;
+package artist.exceptions;
 
 public class AlreadyHasBioException extends  Exception{
     public AlreadyHasBioException(){

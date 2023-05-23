@@ -1,0 +1,63 @@
+User Roger.Ebert was registered as critic.
+User Din.Grogu was registered as admin.
+User Peter.Bradshaw was registered as critic.
+User Bo-Katan.Kryze was registered as admin.
+User Din.Djarin was registered as admin.
+All registered users:
+Admin Bo-Katan.Kryze has uploaded 0 shows
+Admin Din.Djarin has uploaded 0 shows
+Admin Din.Grogu has uploaded 0 shows
+User Peter.Bradshaw has posted 0 reviews
+User Roger.Ebert has posted 0 reviews
+No shows have been uploaded.
+John Krasinski bio was created.
+20-10-1979
+Newton, Massachusetts, USA
+Movie A Quiet Place (2018) was uploaded [4 new artists were created].
+20-10-1979
+Newton, Massachusetts, USA
+A Quiet Place; 2018; director [movie]
+Series Peaky Blinders (2013) was uploaded [8 new artists were created].
+Peaky Blinders; 2013; actor [series]
+Tom Hardy bio was updated.
+Series The Office (2005) was uploaded [5 new artists were created].
+Movie Locke (2014) was uploaded [0 new artists were created].
+15-09-1977
+London, UK
+Locke; 2014; actor [movie]
+Peaky Blinders; 2013; actor [series]
+Movie Star Wars: Episode VIII - The Last Jedi (2016) was uploaded [5 new artists were created].
+Movie Doctor Strange in the Multiverse of Madness (2022) was uploaded [5 new artists were created].
+Series Sherlock (2010) was uploaded [4 new artists were created].
+All shows:
+A Quiet Place; John Krasinski; 90; 16A; 2018; Drama; Emily Blunt; Millicent Simmonds; Noah Jupe
+Doctor Strange in the Multiverse of Madness; Sam Raimi; 126; 12A; 2022; Action; Benedict Cumberbatch; Chiwetel Ejiofor; Elizabeth Olsen
+Locke; Steven Knight; 145; 12A; 2014; Drama; Tom Hardy
+Peaky Blinders; Steven Knight; 6; 16+; 2013; Crime; Cillian Murphy; Paul Anderson; Helen McCrory
+Sherlock; Mark Gatiss; 4; 16+; 2010; Crime; Benedict Cumberbatch; Martin Freeman; Una Stubbs
+Star Wars: Episode VIII - The Last Jedi; Rian Johnson; 152; 7A; 2016; Sci-Fi; Mark Hamill; Carrie Fisher; Daisy Ridley
+The Office; Greg Daniels; 9; 15+; 2005; Comedy; Steve Carell; Jenna Fischer; John Krasinski
+Movie Edge of Tomorrow (2014) was uploaded [2 new artists were created].
+Series The English (2022) was uploaded [2 new artists were created].
+Locke; 2014; director [movie]
+Peaky Blinders; 2013; creator [series]
+15-09-1977
+London, UK
+Locke; 2014; actor [movie]
+Peaky Blinders; 2013; actor [series]
+The English; 2022; actor [series]
+A Quiet Place; 2018; actor [movie]
+Edge of Tomorrow; 2014; actor [movie]
+Doctor Strange in the Multiverse of Madness; 2022; actor [movie]
+Sherlock; 2010; actor [series]
+No information about Jane Campion!
+Movie The Power of the Dog (2021) was uploaded [2 new artists were created].
+Jane Campion bio was updated.
+Bio of Jane Campion is already available!
+30-04-1954
+Wellington, New Zealand
+The Power of the Dog; 2021; director [movie]
+Doctor Strange in the Multiverse of Madness; 2022; actor [movie]
+The Power of the Dog; 2021; actor [movie]
+Sherlock; 2010; actor [series]
+Bye!

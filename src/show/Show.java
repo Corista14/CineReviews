@@ -1,6 +1,5 @@
 package show;
 
-import artist.Artist;
 import review.Review;
 import user.User;
 
@@ -29,6 +28,7 @@ public interface Show {
 
     /**
      * Adds a new review to the show
+     *
      * @param review review that will be added to the show
      */
     void addReview(Review review);
@@ -42,14 +42,22 @@ public interface Show {
     boolean userHasReviewed(User user);
 
     /**
-     *  Gets the year of release of the Show
+     * Gets the year of release of the Show
+     *
      * @return the year of release of the Show
      */
     int getYearOfRelease();
 
     /**
      * Gets the name of the Show
+     *
      * @return the name of the Show
      */
-    String getName();
+    String getTitle();
+
+    /**
+     * Returns the score of the show
+     * @return the score of the show
+     */
+    float getScore();
 }

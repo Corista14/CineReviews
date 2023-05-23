@@ -9,9 +9,10 @@ public class ReviewClass implements Review {
 
     private int score;
 
-    public ReviewClass(OrdinaryUser reviewer) {
+
+    public ReviewClass(OrdinaryUser reviewer,int score) {
         this.reviewer = reviewer;
-        score = 0;
+        this.score=score;
     }
 
     @Override

@@ -1,15 +1,14 @@
 package artist;
 
-import artist.Exceptions.AlreadyHasBioException;
+import artist.exceptions.AlreadyHasBioException;
 import show.Show;
 import show.ShowComparatorByYear;
 
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class ArtistClass implements Artist{
+public class ArtistClass implements Artist {
 
     private String name;
     private String dateOfBirth;
@@ -17,18 +16,18 @@ public class ArtistClass implements Artist{
     private boolean hasBio;
     private Set<Show> shows;
 
-    public  ArtistClass(String name){
-        this.name=name;
-        this.hasBio=false;
-        shows=new TreeSet<Show>(new ShowComparatorByYear());
+    public ArtistClass(String name) {
+        this.name = name;
+        this.hasBio = false;
+        shows = new TreeSet<Show>(new ShowComparatorByYear());
     }
 
-    public  ArtistClass (String name,String dateOfBirth, String placeOfBirth){
-        this.name=name;
-        this.dateOfBirth=dateOfBirth;
-        this.placeOfBirth=placeOfBirth;
-        this.hasBio=true;
-        shows=new TreeSet<Show>(new ShowComparatorByYear());
+    public ArtistClass(String name, String dateOfBirth, String placeOfBirth) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.placeOfBirth = placeOfBirth;
+        this.hasBio = true;
+        shows = new TreeSet<>(new ShowComparatorByYear());
     }
 
     @Override
@@ -37,13 +36,12 @@ public class ArtistClass implements Artist{
     }
 
     @Override
-    public void addBio(String dateOfBirth, String placeOfBirth) throws  AlreadyHasBioException{
-        if(hasBio){
-            throw new AlreadyHasBioException();
-        }else{
-            this.placeOfBirth=placeOfBirth;
-            this.dateOfBirth=dateOfBirth;
-            this.hasBio=true;
+    public void addBio(String dateOfBirth, String placeOfBirth) throws AlreadyHasBioException {
+        if (hasBio) throw new AlreadyHasBioException();
+        else {
+            this.placeOfBirth = placeOfBirth;
+            this.dateOfBirth = dateOfBirth;
+            this.hasBio = true;
         }
     }
 
@@ -65,5 +63,10 @@ public class ArtistClass implements Artist{
     @Override
     public String getPlaceOfBirth() {
         return placeOfBirth;
+    }
+
+    @Override
+    public void addShow(Show show) {
+        shows.add(show);
     }
 }

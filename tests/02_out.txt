@@ -1,0 +1,19 @@
+No users registered.
+User Roger.Ebert was registered as critic.
+User Eve was registered as audience.
+User Alice was registered as audience.
+User Bob was registered as audience.
+User Din.Grogu was registered as admin.
+User Peter.Bradshaw was registered as critic.
+User Bo-Katan.Kryze was registered as admin.
+User Din.Djarin was registered as admin.
+All registered users:
+User Alice has posted 0 reviews
+Admin Bo-Katan.Kryze has uploaded 0 shows
+User Bob has posted 0 reviews
+Admin Din.Djarin has uploaded 0 shows
+Admin Din.Grogu has uploaded 0 shows
+User Eve has posted 0 reviews
+User Peter.Bradshaw has posted 0 reviews
+User Roger.Ebert has posted 0 reviews
+Bye!
