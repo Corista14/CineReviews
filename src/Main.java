@@ -74,7 +74,6 @@ public class Main {
      *  Format: Title, Director, duration or season number (Movie vs Series), Age Certification, releaseYear,
      *  main genre, cast (a printed comma list of the name of the artists)
      */
-
     private static void executeShows(CineReviews cine) {
         Iterator<Show> it = cine.listAllShows();
         if (!it.hasNext()) System.out.println(NO_SHOWS);

@@ -36,4 +36,9 @@ public abstract class AbstractOrdinaryUser implements OrdinaryUser {
     public int getReviewsCount() {
         return reviewCount;
     }
+
+    @Override
+    public void incrementReviewCount() {
+        reviewCount++;
+    }
 }

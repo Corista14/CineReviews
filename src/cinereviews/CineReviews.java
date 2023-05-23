@@ -16,6 +16,15 @@ import java.util.Iterator;
  */
 public interface CineReviews {
 
+    /**
+     * Registers a new User to the application
+     *
+     * @param type     type of the user (Critic, Audience or Admin)
+     * @param name     name of the user
+     * @param password password (in case it's an admin) of the user
+     * @throws UnknownUserTypeException   exception when the user type is unknown
+     * @throws UserAlreadyExistsException exception when the user already exists
+     */
     void registerUser(String type, String name, String password) throws UnknownUserTypeException, UserAlreadyExistsException;
 
     /**
@@ -41,9 +50,12 @@ public interface CineReviews {
      * @param genres           genres of the movie
      * @param cast             list of the names of the cast members
      * @return number of added artist
+     * @throws NotAnAdminException        exception when the user is not an admin
+     * @throws WrongPasswordException     exception when the password of the admin is wrong
+     * @throws ShowAlreadyExistsException exception when the show already exists
      */
     int addMovie(String adminName, String password, String title,
-                  String director, int duration, String ageCertification, int releaseYear, Iterator<String> genres, Iterator<String> cast)
+                 String director, int duration, String ageCertification, int releaseYear, Iterator<String> genres, Iterator<String> cast)
             throws NotAnAdminException, WrongPasswordException, ShowAlreadyExistsException;
 
     /**
@@ -62,9 +74,12 @@ public interface CineReviews {
      * @param genres           list of genres of the series
      * @param cast             list of names of the cast members
      * @return number of added artists
+     * @throws NotAnAdminException        exception when the user is not an admin
+     * @throws WrongPasswordException     exception when the password of the admin is wrong
+     * @throws ShowAlreadyExistsException exception when the show already exists
      */
     int addSeries(String AdminName, String password, String title,
-                   String creator, int seasonAmount, String ageCertification, int releaseYear, Iterator<String> genres, Iterator<String> cast) throws NotAnAdminException, WrongPasswordException, ShowAlreadyExistsException;
+                  String creator, int seasonAmount, String ageCertification, int releaseYear, Iterator<String> genres, Iterator<String> cast) throws NotAnAdminException, WrongPasswordException, ShowAlreadyExistsException;
 
     /**
      * Lists all the shows that are stored in the platform by alphabetical order of the title
@@ -79,6 +94,7 @@ public interface CineReviews {
      * @param name         name of the artist
      * @param dateOfBirth  date of birth of the artist
      * @param placeOfBirth place of birth of the artist
+     * @throws AlreadyHasBioException exception when the artist already has a bio
      */
     void addArtistBio(String name, String dateOfBirth, String placeOfBirth) throws AlreadyHasBioException;
 

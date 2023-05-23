@@ -159,7 +159,7 @@ public class CineReviewsClass implements CineReviews {
         shows.put(title, new SeriesClass(user, title, director, seasonNumber, ageCertification, releaseYear, genres, convertedCast.iterator()));
         addShowToCast(convertedCast, title);
         artists.get(director).addShow(shows.get(title));
-        user.addedShow();
+        user.incrementPostedShows();
 
         int lastAdded = artistAdded;
         artistAdded = 0;
@@ -172,7 +172,7 @@ public class CineReviewsClass implements CineReviews {
         shows.put(title, new MovieClass(user, title, director, duration, ageCertification, releaseYear, genres, convertedCast.iterator()));
         addShowToCast(convertedCast, title);
         artists.get(director).addShow(shows.get(title));
-        user.addedShow();
+        user.incrementPostedShows();
 
         int lastAdded = artistAdded;
         artistAdded = 0;

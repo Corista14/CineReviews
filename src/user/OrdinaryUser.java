@@ -12,4 +12,9 @@ public interface OrdinaryUser extends User {
      * @return the number of reviews that a user has
      */
     int getReviewsCount();
+
+    /**
+     * Increments the review count by one
+     */
+    void incrementReviewCount();
 }
