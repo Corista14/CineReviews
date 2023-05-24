@@ -1,5 +1,6 @@
 package show;
 
+import artist.Artist;
 import review.Review;
 import user.User;
 
@@ -57,7 +58,33 @@ public interface Show {
 
     /**
      * Returns the score of the show
+     *
      * @return the score of the show
      */
     float getScore();
+
+    /**
+     * Gets the name of the director
+     *
+     * @return the name of the director
+     */
+    String getDirectorName();
+
+    /**
+     * Gets the age of certification
+     *
+     * @return the age of certification
+     */
+    String getAgeCertification();
+
+    /**
+     * Gets the main genre of the show (the first in the collection)
+     *
+     * @return the main genre of the show (the first in the collection)
+     */
+    String getMainGenre();
+
+    Iterator<Artist> getCast();
+
+    String getArtistRole(String artist);
 }

@@ -37,16 +37,18 @@ public interface Artist {
     boolean hasBio();
 
     /**
+     * Gets the date of birth of the artist if he has a bio
+     *
      * @return the date of birth of the artist if he has a bio
      * @pre hasBio()
-     * Gets the date of birth of the artist if he has a bio
      */
     String getDateOfBirth();
 
     /**
+     * Gets the place of birth of the artist if he has a bio
+     *
      * @return the place of birth of the artist of he has a bio
      * @pre hasBio()
-     * Gets the place of birth of the artist if he has a bio
      */
     String getPlaceOfBirth();
 

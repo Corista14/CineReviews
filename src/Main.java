@@ -1,3 +1,6 @@
+import artist.Artist;
+import artist.exceptions.AlreadyHasBioException;
+import artist.exceptions.UnknownArtistException;
 import cinereviews.CineReviews;
 import cinereviews.CineReviewsClass;
 import show.Movie;
@@ -43,7 +46,14 @@ public class Main {
     private static final String MOVIE_ADDED = "Movie %s (%d) was uploaded [%d new artists were created].\n";
     private static final String SERIES_ADDED = "Series %s (%d) was uploaded [%d new artists were created].\n";
     private static final String ALL_USERS = "All registered users:";
+    private static final String ALL_SHOWS = "All shows:";
     private static final String NO_SHOWS = "No shows have been uploaded.";
+    private static final String ALREADY_HAS_BIO = "Bio of %s is already available!\n";
+    private static final String BIO_CREATED = "%s bio was created.\n";
+    private static final String BIO_UPDATED = "%s bio was updated.\n";
+    private static final String UNKNOWN_ARTIST = "No information about %s!\n";
+    private static final String SHOW_CREDIT = "%s; %d; %s [%s]\n";
+
 
     public static void main(String[] args) {
         executeCommands();
@@ -65,26 +75,75 @@ public class Main {
                 case MOVIE -> executeMovie(in, cine);
                 case SERIES -> executeSeries(in, cine);
                 case SHOWS -> executeShows(cine);
+                case ARTIST -> executeArtist(in, cine);
+                case CREDITS -> executeCredits(in, cine);
                 default -> System.out.println(UNKNOWN_COMMAND);
             }
         } while (!command.name().equals(Command.EXIT.name()));
     }
 
-    /** TODO: UPDATE THE PRINTED LIST OF SHOWS:
-     *  Format: Title, Director, duration or season number (Movie vs Series), Age Certification, releaseYear,
-     *  main genre, cast (a printed comma list of the name of the artists)
-     */
+    private static void executeCredits(Scanner in, CineReviews cine) {
+        String artistName = in.nextLine().trim();
+
+        try {
+            Iterator<Show> credits = cine.getArtistCredits(artistName);
+            if (cine.artistHasBio(artistName)) {
+                System.out.println(cine.getDateOfBirthOfArtist(artistName));
+                System.out.println(cine.getPlaceOfBirthOfArtist(artistName));
+            }
+            while (credits.hasNext()) {
+                Show next = credits.next();
+                if (next instanceof Movie movie)
+                    System.out.printf(SHOW_CREDIT, movie.getTitle(), movie.getYearOfRelease(),
+                            cine.getArtistRole(artistName, movie.getTitle()), "movie");
+                else if (next instanceof Series series)
+                    System.out.printf(SHOW_CREDIT, series.getTitle(), series.getYearOfRelease(),
+                            cine.getArtistRole(artistName, series.getTitle()), "series");
+            }
+        } catch (UnknownArtistException e) {
+            System.out.printf(UNKNOWN_ARTIST, artistName);
+        }
+    }
+
+    private static void executeArtist(Scanner in, CineReviews cine) {
+        String name = in.nextLine().trim();
+        String dateOfBirth = in.nextLine();
+        String placeOfBirth = in.nextLine();
+
+        try {
+            boolean wasCreated = cine.addArtistBio(name, dateOfBirth, placeOfBirth);
+            if (wasCreated)
+                System.out.printf(BIO_CREATED, name);
+            else
+                System.out.printf(BIO_UPDATED, name);
+        } catch (AlreadyHasBioException e) {
+            System.out.printf(ALREADY_HAS_BIO, name);
+        }
+    }
+
+
     private static void executeShows(CineReviews cine) {
         Iterator<Show> it = cine.listAllShows();
         if (!it.hasNext()) System.out.println(NO_SHOWS);
         else {
-            System.out.println(ALL_USERS);
+            System.out.println(ALL_SHOWS);
             while (it.hasNext()) {
                 Show next = it.next();
+                StringBuilder cast = new StringBuilder();
+                Iterator<Artist> castIt = next.getCast();
+                while (castIt.hasNext()) {
+                    Artist nextArtist = castIt.next();
+                    cast.append(nextArtist.getName());
+                    if (castIt.hasNext()) cast.append("; ");
+                }
                 if (next instanceof Series series)
-                    System.out.printf("%s; %s; %d; %s; %d; %s; %s");
-                else if (next instanceof Movie ordinary)
-                    System.out.printf("%s; %s; %d; %s; %d; %s; %s");
+                    System.out.printf("%s; %s; %d; %s; %d; %s; %s\n", series.getTitle(), series.getDirectorName(),
+                            series.getNumberOfSeasons(), series.getAgeCertification(), series.getYearOfRelease(),
+                            series.getMainGenre(), cast);
+                else if (next instanceof Movie movie)
+                    System.out.printf("%s; %s; %d; %s; %d; %s; %s\n", movie.getTitle(), movie.getDirectorName(),
+                            movie.getDuration(), movie.getAgeCertification(), movie.getYearOfRelease(),
+                            movie.getMainGenre(), cast);
             }
         }
     }
@@ -181,6 +240,7 @@ public class Main {
             System.out.printf(USER_ALREADY_EXISTS, username);
         }
     }
+
 
     private static void executeHelp() {
         for (Command command : Command.values()) {

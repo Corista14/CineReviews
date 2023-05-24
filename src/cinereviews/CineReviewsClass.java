@@ -3,6 +3,7 @@ package cinereviews;
 import artist.Artist;
 import artist.ArtistClass;
 import artist.exceptions.AlreadyHasBioException;
+import artist.exceptions.UnknownArtistException;
 import show.SeriesClass;
 import show.exceptions.ShowAlreadyExistsException;
 import show.MovieClass;
@@ -58,11 +59,10 @@ public class CineReviewsClass implements CineReviews {
         return users.values().iterator();
     }
 
-    // TODO: REFACTOR THIS METHOD BECAUSE IT'S UGLY
     @Override
     public int addMovie(String adminName, String password, String title, String director,
-                        int duration, String ageCertification, int releaseYear, Iterator<String> genres, Iterator<String> cast)
-            throws NotAnAdminException, WrongPasswordException, ShowAlreadyExistsException {
+                        int duration, String ageCertification, int releaseYear, Iterator<String> genres, Iterator<String> cast) throws NotAnAdminException,
+            WrongPasswordException, ShowAlreadyExistsException {
 
         if (!users.containsKey(adminName) || (!(users.get(adminName) instanceof AdminUser user)))
             throw new NotAnAdminException();
@@ -91,12 +91,16 @@ public class CineReviewsClass implements CineReviews {
     }
 
     @Override
-    public void addArtistBio(String name, String dateOfBirth, String placeOfBirth) throws AlreadyHasBioException {
+    public boolean addArtistBio(String name, String dateOfBirth, String placeOfBirth) throws AlreadyHasBioException {
+        boolean wasCreated;
         if (!artists.containsKey(name)) {
             artists.put(name, new ArtistClass(name, dateOfBirth, placeOfBirth));
+            wasCreated=true;
         } else {
             artists.get(name).addBio(dateOfBirth, placeOfBirth);
+            wasCreated=false;
         }
+        return wasCreated;
     }
 
     @Override
@@ -107,6 +111,32 @@ public class CineReviewsClass implements CineReviews {
     @Override
     public String getArtistPlaceOfBirth(String artistName) {
         return artists.get(artistName).getPlaceOfBirth();
+    }
+
+    @Override
+    public Iterator<Show> getArtistCredits(String artistName) throws UnknownArtistException {
+        if (!artists.containsKey(artistName)) throw new UnknownArtistException();
+        return artists.get(artistName).getShows();
+    }
+
+    @Override
+    public boolean artistHasBio(String artist) {
+        return artists.get(artist).hasBio();
+    }
+
+    @Override
+    public String getDateOfBirthOfArtist(String artist) {
+        return artists.get(artist).getDateOfBirth();
+    }
+
+    @Override
+    public String getPlaceOfBirthOfArtist(String artist) {
+        return artists.get(artist).getPlaceOfBirth();
+    }
+
+    @Override
+    public String getArtistRole(String artistName, String show) {
+        return shows.get(show).getArtistRole(artistName);
     }
 
     private void createAdmin(String name, String password) throws UserAlreadyExistsException {

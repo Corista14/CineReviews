@@ -1,6 +1,7 @@
 package cinereviews;
 
 import artist.exceptions.AlreadyHasBioException;
+import artist.exceptions.UnknownArtistException;
 import show.exceptions.ShowAlreadyExistsException;
 import show.Show;
 import user.User;
@@ -96,7 +97,7 @@ public interface CineReviews {
      * @param placeOfBirth place of birth of the artist
      * @throws AlreadyHasBioException exception when the artist already has a bio
      */
-    void addArtistBio(String name, String dateOfBirth, String placeOfBirth) throws AlreadyHasBioException;
+    boolean addArtistBio(String name, String dateOfBirth, String placeOfBirth) throws AlreadyHasBioException;
 
     /**
      * Returns the artists date of birth if he has a bio
@@ -113,4 +114,14 @@ public interface CineReviews {
      * @return place of birth of the artist
      */
     String getArtistPlaceOfBirth(String artistName);
+
+    Iterator<Show> getArtistCredits(String artistName) throws UnknownArtistException;
+
+    boolean artistHasBio(String artist);
+
+    String getPlaceOfBirthOfArtist(String artist);
+
+    String getDateOfBirthOfArtist(String artist);
+
+    String getArtistRole(String artistName, String show);
 }

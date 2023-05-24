@@ -19,7 +19,7 @@ public class ArtistClass implements Artist {
     public ArtistClass(String name) {
         this.name = name;
         this.hasBio = false;
-        shows = new TreeSet<Show>(new ShowComparatorByYear());
+        shows = new TreeSet<>(new ShowComparatorByYear());
     }
 
     public ArtistClass(String name, String dateOfBirth, String placeOfBirth) {
