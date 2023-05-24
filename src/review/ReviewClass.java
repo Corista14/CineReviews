@@ -2,17 +2,20 @@ package review;
 
 import user.CriticUser;
 import user.OrdinaryUser;
+import util.Classification;
 
 public class ReviewClass implements Review {
 
     private final OrdinaryUser reviewer;
 
-    private int score;
+    private final String classification;
 
+    private final String description;
 
-    public ReviewClass(OrdinaryUser reviewer,int score) {
+    public ReviewClass(OrdinaryUser reviewer, String description, String classification) {
         this.reviewer = reviewer;
-        this.score=score;
+        this.description = description;
+        this.classification = classification;
     }
 
     @Override
@@ -22,7 +25,7 @@ public class ReviewClass implements Review {
 
     @Override
     public int getScore() {
-        return score;
+        return Classification.valueOf(classification.toUpperCase()).getValue();
     }
 
     @Override
@@ -33,5 +36,20 @@ public class ReviewClass implements Review {
     @Override
     public boolean madeByCritic() {
         return reviewer instanceof CriticUser;
+    }
+
+    @Override
+    public boolean userAlreadyReviewed(OrdinaryUser user) {
+        return reviewer.equals(user);
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String getClassification() {
+        return classification;
     }
 }

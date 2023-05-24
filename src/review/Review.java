@@ -32,4 +32,9 @@ public interface Review {
      */
     boolean madeByCritic();
 
+    boolean userAlreadyReviewed(OrdinaryUser user);
+
+    String getDescription();
+
+    String getClassification();
 }

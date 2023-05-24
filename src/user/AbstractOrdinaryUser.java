@@ -41,4 +41,10 @@ public abstract class AbstractOrdinaryUser implements OrdinaryUser {
     public void incrementReviewCount() {
         reviewCount++;
     }
+
+    @Override
+    public String getUserType() {
+        if (this instanceof CriticUser) return "critic";
+        else return "audience";
+    }
 }

@@ -13,13 +13,12 @@ public class ReviewComparator implements Comparator<Review> {
             if (r1.getScore() == r2.getScore())
                 return r1.getUserName().compareTo(r2.getUserName());
             else
-                return r1.getScore() - r2.getScore();
+                return r2.getScore() - r1.getScore();
         } else {
             if (r1.madeByCritic())
-                return POSITIVE_NUMBER;
-            else
                 return NEGATIVE_NUMBER;
-
+            else
+                return POSITIVE_NUMBER;
         }
     }
 }

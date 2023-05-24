@@ -2,8 +2,11 @@ package cinereviews;
 
 import artist.exceptions.AlreadyHasBioException;
 import artist.exceptions.UnknownArtistException;
+import review.Review;
+import review.exceptions.UserAlreadyReviewedException;
 import show.exceptions.ShowAlreadyExistsException;
 import show.Show;
+import show.exceptions.UnknownShowException;
 import user.User;
 import user.exceptions.*;
 
@@ -124,4 +127,11 @@ public interface CineReviews {
     String getDateOfBirthOfArtist(String artist);
 
     String getArtistRole(String artistName, String show);
+
+    int reviewShow(String username, String review, String showName, String score) throws
+            UnknownUserException, IsAdminException, UnknownShowException, UserAlreadyReviewedException;
+
+    Iterator<Review> getReviewsOfShow(String showName) throws UnknownShowException;
+
+    float getScoreOfShow(String showName);
 }

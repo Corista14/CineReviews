@@ -3,17 +3,18 @@ import artist.exceptions.AlreadyHasBioException;
 import artist.exceptions.UnknownArtistException;
 import cinereviews.CineReviews;
 import cinereviews.CineReviewsClass;
+import review.Review;
+import review.exceptions.UserAlreadyReviewedException;
 import show.Movie;
 import show.Series;
 import show.Show;
 import show.exceptions.ShowAlreadyExistsException;
+import show.exceptions.UnknownShowException;
 import user.AdminUser;
 import user.OrdinaryUser;
 import user.User;
-import user.exceptions.NotAnAdminException;
-import user.exceptions.UnknownUserTypeException;
-import user.exceptions.UserAlreadyExistsException;
-import user.exceptions.WrongPasswordException;
+import user.exceptions.*;
+import util.Classification;
 import util.Command;
 
 import java.util.ArrayList;
@@ -53,7 +54,14 @@ public class Main {
     private static final String BIO_UPDATED = "%s bio was updated.\n";
     private static final String UNKNOWN_ARTIST = "No information about %s!\n";
     private static final String SHOW_CREDIT = "%s; %d; %s [%s]\n";
-
+    private static final String ADMIN_CANT_REVIEW = "Admin %s cannot review shows!\n";
+    private static final String ALREADY_REVIEWED = "%s has already reviewed %s!\n";
+    private static final String REVIEW_REGISTERED = "Review for %s was registered [%d reviews].\n";
+    private static final String UNKNOWN_SHOW = "Show %s does not exist!\n";
+    private static final String UNKNOWN_USER = "User %s does not exist!\n";
+    private static final String SHOW_HAS_NO_REVIEWS = "Show %s has no reviews.\n";
+    private static final String REVIEWS_OF = "Reviews of %s [%.1f]:\n";
+    private static final String REVIEW_OF_USER = "Review of %s (%s): %s [%s]\n";
 
     public static void main(String[] args) {
         executeCommands();
@@ -77,9 +85,50 @@ public class Main {
                 case SHOWS -> executeShows(cine);
                 case ARTIST -> executeArtist(in, cine);
                 case CREDITS -> executeCredits(in, cine);
+                case REVIEW -> executeReview(in, cine);
+                case REVIEWS -> executeReviews(in, cine);
                 default -> System.out.println(UNKNOWN_COMMAND);
             }
         } while (!command.name().equals(Command.EXIT.name()));
+    }
+
+    private static void executeReviews(Scanner in, CineReviews cine) {
+        String show = in.nextLine().trim();
+
+        try {
+            Iterator<Review> it = cine.getReviewsOfShow(show);
+            if (!it.hasNext()) System.out.printf(SHOW_HAS_NO_REVIEWS, show);
+            else {
+                System.out.printf(REVIEWS_OF, show, cine.getScoreOfShow(show));
+                while (it.hasNext()) {
+                    Review next = it.next();
+                    System.out.printf(REVIEW_OF_USER, next.getReviewer().getName(),
+                            next.getReviewer().getUserType(), next.getDescription(), next.getClassification());
+                }
+            }
+        } catch (UnknownShowException e) {
+            System.out.printf(UNKNOWN_SHOW, show);
+        }
+    }
+
+    private static void executeReview(Scanner in, CineReviews cine) {
+        String username = in.next();
+        String show = in.nextLine().trim();
+        String review = in.nextLine();
+        String score = in.nextLine();
+
+        try {
+            int reviewNum = cine.reviewShow(username, review, show, score);
+            System.out.printf(REVIEW_REGISTERED, show, reviewNum);
+        } catch (UnknownUserException e) {
+            System.out.printf(UNKNOWN_USER, username);
+        } catch (IsAdminException e) {
+            System.out.printf(ADMIN_CANT_REVIEW, username);
+        } catch (UnknownShowException e) {
+            System.out.printf(UNKNOWN_SHOW, show);
+        } catch (UserAlreadyReviewedException e) {
+            System.out.printf(ALREADY_REVIEWED, username, show);
+        }
     }
 
     private static void executeCredits(Scanner in, CineReviews cine) {

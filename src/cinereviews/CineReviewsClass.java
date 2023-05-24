@@ -4,12 +4,18 @@ import artist.Artist;
 import artist.ArtistClass;
 import artist.exceptions.AlreadyHasBioException;
 import artist.exceptions.UnknownArtistException;
+import org.hamcrest.core.Is;
+import review.Review;
+import review.ReviewClass;
+import review.exceptions.UserAlreadyReviewedException;
 import show.SeriesClass;
 import show.exceptions.ShowAlreadyExistsException;
 import show.MovieClass;
 import show.Show;
+import show.exceptions.UnknownShowException;
 import user.*;
 import user.exceptions.*;
+import util.Classification;
 
 import java.util.*;
 
@@ -66,11 +72,10 @@ public class CineReviewsClass implements CineReviews {
 
         if (!users.containsKey(adminName) || (!(users.get(adminName) instanceof AdminUser user)))
             throw new NotAnAdminException();
-        else {
-            if (!user.passwordMatches(password)) throw new WrongPasswordException();
-            else if (shows.containsKey(title)) throw new ShowAlreadyExistsException();
-            else return addMovieHelper(director, duration, cast, title, user, ageCertification, releaseYear, genres);
-        }
+        if (!user.passwordMatches(password)) throw new WrongPasswordException();
+        if (shows.containsKey(title)) throw new ShowAlreadyExistsException();
+
+        return addMovieHelper(director, duration, cast, title, user, ageCertification, releaseYear, genres);
     }
 
     @Override
@@ -78,11 +83,11 @@ public class CineReviewsClass implements CineReviews {
             throws NotAnAdminException, WrongPasswordException, ShowAlreadyExistsException {
         if (!users.containsKey(adminName) || (!(users.get(adminName) instanceof AdminUser user)))
             throw new NotAnAdminException();
-        else {
-            if (!user.passwordMatches(password)) throw new WrongPasswordException();
-            else if (shows.containsKey(title)) throw new ShowAlreadyExistsException();
-            else return addSeriesHelper(director, cast, title, seasonAmount, user, ageCertification, releaseYear, genres);
-        }
+        if (!user.passwordMatches(password)) throw new WrongPasswordException();
+        if (shows.containsKey(title)) throw new ShowAlreadyExistsException();
+
+        return addSeriesHelper(director, cast, title, seasonAmount, user, ageCertification, releaseYear, genres);
+
     }
 
     @Override
@@ -95,10 +100,10 @@ public class CineReviewsClass implements CineReviews {
         boolean wasCreated;
         if (!artists.containsKey(name)) {
             artists.put(name, new ArtistClass(name, dateOfBirth, placeOfBirth));
-            wasCreated=true;
+            wasCreated = true;
         } else {
             artists.get(name).addBio(dateOfBirth, placeOfBirth);
-            wasCreated=false;
+            wasCreated = false;
         }
         return wasCreated;
     }
@@ -137,6 +142,31 @@ public class CineReviewsClass implements CineReviews {
     @Override
     public String getArtistRole(String artistName, String show) {
         return shows.get(show).getArtistRole(artistName);
+    }
+
+    @Override
+    public int reviewShow(String username, String review, String showName, String score) throws
+            UnknownUserException, IsAdminException, UnknownShowException, UserAlreadyReviewedException {
+
+        if (!users.containsKey(username)) throw new UnknownUserException();
+        if (users.get(username) instanceof AdminUser) throw new IsAdminException();
+        if (!shows.containsKey(showName)) throw new UnknownShowException();
+        if (shows.get(showName).userHasReviewed(users.get(username))) throw new UserAlreadyReviewedException();
+
+        Show show = shows.get(showName);
+        show.addReview(new ReviewClass((OrdinaryUser) users.get(username), review, score));
+        return show.getReviewsCount();
+    }
+
+    @Override
+    public Iterator<Review> getReviewsOfShow(String showName) throws UnknownShowException {
+        if (!shows.containsKey(showName)) throw new UnknownShowException();
+        return shows.get(showName).getReviews();
+    }
+
+    @Override
+    public float getScoreOfShow(String showName) {
+        return shows.get(showName).getScore();
     }
 
     private void createAdmin(String name, String password) throws UserAlreadyExistsException {
