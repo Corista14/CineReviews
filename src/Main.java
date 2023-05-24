@@ -87,10 +87,17 @@ public class Main {
                 case CREDITS -> executeCredits(in, cine);
                 case REVIEW -> executeReview(in, cine);
                 case REVIEWS -> executeReviews(in, cine);
+                case GENRE -> executeGenre(in ,cine);
                 default -> System.out.println(UNKNOWN_COMMAND);
             }
         } while (!command.name().equals(Command.EXIT.name()));
     }
+
+    private static void executeGenre(Scanner in, CineReviews cine) {
+        List<String> genres = readSequenceOfStrings(in);
+
+    }
+
 
     private static void executeReviews(Scanner in, CineReviews cine) {
         String show = in.nextLine().trim();
@@ -131,6 +138,7 @@ public class Main {
         }
     }
 
+    // TODO: Refactor this method to look cleaner
     private static void executeCredits(Scanner in, CineReviews cine) {
         String artistName = in.nextLine().trim();
 
@@ -171,6 +179,7 @@ public class Main {
     }
 
 
+    // TODO: Refactor this method to look cleaner
     private static void executeShows(CineReviews cine) {
         Iterator<Show> it = cine.listAllShows();
         if (!it.hasNext()) System.out.println(NO_SHOWS);
