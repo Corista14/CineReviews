@@ -3,6 +3,10 @@ import artist.exceptions.AlreadyHasBioException;
 import artist.exceptions.UnknownArtistException;
 import cinereviews.CineReviews;
 import cinereviews.CineReviewsClass;
+import cinereviews.exceptions.NoArtistException;
+import cinereviews.exceptions.NoCollaborationsException;
+import cinereviews.exceptions.NoShowsThisYearException;
+import cinereviews.exceptions.NoShowsWithGenreException;
 import review.Review;
 import review.exceptions.UserAlreadyReviewedException;
 import show.Movie;
@@ -62,6 +66,14 @@ public class Main {
     private static final String SHOW_HAS_NO_REVIEWS = "Show %s has no reviews.\n";
     private static final String REVIEWS_OF = "Reviews of %s [%.1f]:\n";
     private static final String REVIEW_OF_USER = "Review of %s (%s): %s [%s]\n";
+    private static final String NO_SHOWS_IN_YEAR = "No show was found within the criteria.";
+    private static final String RELEASED_HEADER = "Shows released on %d:\n";
+    private static final String RELEASED_MOVIE = "Movie %s by %s released on %d [%.1f]\n";
+    private static final String RELEASED_SERIES = "Series %s by %s released on %d [%.1f]\n";
+    private static final String NO_ARTISTS = "No artists yet!\n";
+    private static final String NO_COLLABORATIONS = "No collaborations yet!\n";
+    private static final String FRIENDS_HEADER = "These artists have worked on %d projects together\n";
+    private static final String FRIENDS_PRINTER = "%s and %s\n";
 
     public static void main(String[] args) {
         executeCommands();
@@ -87,15 +99,68 @@ public class Main {
                 case CREDITS -> executeCredits(in, cine);
                 case REVIEW -> executeReview(in, cine);
                 case REVIEWS -> executeReviews(in, cine);
-                case GENRE -> executeGenre(in ,cine);
+                case GENRE -> executeGenre(in, cine);
+                case RELEASED -> executeReleased(in, cine);
+                case FRIENDS -> executeFriends(in, cine);
                 default -> System.out.println(UNKNOWN_COMMAND);
             }
         } while (!command.name().equals(Command.EXIT.name()));
     }
 
+    private static void executeFriends(Scanner in, CineReviews cine) {
+
+        try {
+            Iterator<Artist> allFriendsIt = cine.getAllFriends();   //TODO:FIX THIS ITS SO SCUFFY
+            Artist friend = allFriendsIt.next();
+            System.out.printf(FRIENDS_HEADER, friend.getMostTimesWorked());
+            allFriendsIt = cine.getAllFriends();
+            while (allFriendsIt.hasNext()) {
+                friend = allFriendsIt.next();
+                Iterator<Artist> friendsOf = cine.getFriendsOf(friend.getName());
+                while (friendsOf.hasNext()) {
+                    System.out.printf(FRIENDS_PRINTER, friend.getName(), friendsOf.next().getName());
+                }
+            }
+        } catch (NoArtistException e) {
+            System.out.printf(NO_ARTISTS);
+        } catch (NoCollaborationsException e) {
+            System.out.printf(NO_COLLABORATIONS);
+        }
+    }
+
+    private static void executeReleased(Scanner in, CineReviews cine) {
+        int year = in.nextInt();
+        in.nextLine();
+        Iterator<Show> it = cine.getShowsByYear(year);
+        if (!it.hasNext()) System.out.println(NO_SHOWS_IN_YEAR);
+        else {
+            System.out.printf(RELEASED_HEADER, year);
+            while (it.hasNext()) {
+                Show show = it.next();
+                if (show instanceof Movie) {
+                    System.out.printf(RELEASED_MOVIE, show.getTitle(), show.getDirectorName(), show.getYearOfRelease(), show.getScore());
+                } else {
+                    System.out.printf(RELEASED_SERIES, show.getTitle(), show.getDirectorName(), show.getYearOfRelease(), show.getScore());
+                }
+
+            }
+        }
+    }
+
     private static void executeGenre(Scanner in, CineReviews cine) {
         List<String> genres = readSequenceOfStrings(in);
-
+        Iterator<Show> it = cine.getShowsByGenre(genres.iterator());
+        if (!it.hasNext()) System.out.println("No show was found within the criteria.");//uma excessao fica mais giro
+        else {
+            System.out.println("Search by genre:");
+            while (it.hasNext()) {
+                Show next = it.next();
+                if (next instanceof Movie)
+                    System.out.printf(RELEASED_MOVIE, next.getTitle(), next.getDirectorName(), next.getYearOfRelease(), next.getScore());
+                else
+                    System.out.printf(RELEASED_SERIES, next.getTitle(), next.getDirectorName(), next.getYearOfRelease(), next.getScore());
+            }
+        }
     }
 
 

@@ -1,5 +1,10 @@
 package user;
 
+/**
+ * Class that implements the behavior of an Admin
+ *
+ * @author Filipe Corista / João Rodrigues
+ */
 public class AdminUserClass implements AdminUser {
 
     /**

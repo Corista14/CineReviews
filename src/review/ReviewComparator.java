@@ -2,6 +2,11 @@ package review;
 
 import java.util.Comparator;
 
+/**
+ * Comparator that compares two reviews
+ *
+ * @author Filipe Corista / João Rodrigues
+ */
 public class ReviewComparator implements Comparator<Review> {
 
     private static final int POSITIVE_NUMBER = 1;

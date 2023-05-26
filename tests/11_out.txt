@@ -1,0 +1,157 @@
+User grogu was registered as admin.
+No artists yet!
+A1 bio was created.
+It is a small world!
+A2 bio was created.
+These 2 artists never worked together:
+A1, A2
+A3 bio was created.
+These 3 artists never worked together:
+A1, A2, A3
+A4 bio was created.
+These 4 artists never worked together:
+A1, A2, A3, A4
+Movie Movie M1 (2022) was uploaded [0 new artists were created].
+These 3 artists never worked together:
+A1, A2, A4
+A1, A3, A4
+Series Series S1 (2022) was uploaded [0 new artists were created].
+These 3 artists never worked together:
+A1, A3, A4
+Movie Movie M2 (2022) was uploaded [0 new artists were created].
+These 2 artists never worked together:
+A1, A2
+A1, A3
+A1, A4
+Movie Movie M3 (2022) was uploaded [0 new artists were created].
+These 2 artists never worked together:
+A1, A3
+Series Series S2 (2022) was uploaded [0 new artists were created].
+It is a small world!
+A5 bio was created.
+These 2 artists never worked together:
+A1, A5
+A2, A5
+A3, A5
+A4, A5
+A6 bio was created.
+These 3 artists never worked together:
+A1, A5, A6
+A2, A5, A6
+A3, A5, A6
+A4, A5, A6
+A7 bio was created.
+A8 bio was created.
+These 5 artists never worked together:
+A1, A5, A6, A7, A8
+A2, A5, A6, A7, A8
+A3, A5, A6, A7, A8
+A4, A5, A6, A7, A8
+Movie Movie M4 (2022) was uploaded [0 new artists were created].
+These 4 artists never worked together:
+A1, A5, A6, A7
+A1, A5, A6, A8
+A2, A5, A6, A7
+A2, A5, A6, A8
+A3, A5, A6, A7
+A3, A5, A6, A8
+A4, A5, A6, A7
+A4, A5, A6, A8
+All shows:
+Movie M1; A2; 120; 12+; 2022; Comedy; A3
+Movie M2; A4; 120; 12+; 2022; Comedy; A3
+Movie M3; A4; 120; 12+; 2022; Comedy; A1; A2
+Movie M4; A8; 120; 12+; 2022; Comedy; A7
+Series S1; A4; 120; 12+; 2022; Comedy; A2
+Series S2; A1; 120; 12+; 2022; Comedy; A2; A3
+Series Series S3 (2022) was uploaded [0 new artists were created].
+These 4 artists never worked together:
+A1, A5, A6, A8
+A2, A5, A6, A7
+A2, A5, A6, A8
+A3, A5, A6, A7
+A3, A5, A6, A8
+A4, A5, A6, A7
+A4, A5, A6, A8
+Series Series S4 (2022) was uploaded [0 new artists were created].
+Series Series S5 (2022) was uploaded [0 new artists were created].
+These 4 artists never worked together:
+A2, A5, A6, A7
+A3, A5, A6, A7
+A4, A5, A6, A7
+Series Series S6 (2022) was uploaded [0 new artists were created].
+These 3 artists never worked together:
+A2, A5, A7
+A2, A5, A8
+A2, A6, A7
+A3, A5, A7
+A3, A5, A8
+A3, A6, A7
+A4, A5, A7
+A4, A5, A8
+A4, A6, A7
+All shows:
+Movie M1; A2; 120; 12+; 2022; Comedy; A3
+Movie M2; A4; 120; 12+; 2022; Comedy; A3
+Movie M3; A4; 120; 12+; 2022; Comedy; A1; A2
+Movie M4; A8; 120; 12+; 2022; Comedy; A7
+Series S1; A4; 120; 12+; 2022; Comedy; A2
+Series S2; A1; 120; 12+; 2022; Comedy; A2; A3
+Series S3; A7; 120; 12+; 2022; Comedy; A1
+Series S4; A1; 120; 12+; 2022; Comedy; A8
+Series S5; A6; 120; 12+; 2022; Comedy; A8
+Series S6; A6; 120; 12+; 2022; Comedy; A5
+Movie Movie M5 (2022) was uploaded [0 new artists were created].
+These 3 artists never worked together:
+A2, A5, A7
+A2, A5, A8
+A2, A6, A7
+A3, A6, A7
+A4, A6, A7
+Movie Movie M6 (2022) was uploaded [0 new artists were created].
+These 3 artists never worked together:
+A2, A5, A8
+A2, A6, A7
+A3, A6, A7
+Movie Movie M7 (2022) was uploaded [0 new artists were created].
+These 3 artists never worked together:
+A2, A5, A8
+All shows:
+Movie M1; A2; 120; 12+; 2022; Comedy; A3
+Movie M2; A4; 120; 12+; 2022; Comedy; A3
+Movie M3; A4; 120; 12+; 2022; Comedy; A1; A2
+Movie M4; A8; 120; 12+; 2022; Comedy; A7
+Movie M5; A4; 120; 12+; 2022; Comedy; A3; A5
+Movie M6; A4; 120; 12+; 2022; Comedy; A7; A5
+Movie M7; A6; 120; 12+; 2022; Comedy; A7
+Series S1; A4; 120; 12+; 2022; Comedy; A2
+Series S2; A1; 120; 12+; 2022; Comedy; A2; A3
+Series S3; A7; 120; 12+; 2022; Comedy; A1
+Series S4; A1; 120; 12+; 2022; Comedy; A8
+Series S5; A6; 120; 12+; 2022; Comedy; A8
+Series S6; A6; 120; 12+; 2022; Comedy; A5
+Movie Movie M8 (2022) was uploaded [0 new artists were created].
+These 2 artists never worked together:
+A1, A5
+A1, A6
+A2, A8
+A3, A8
+A4, A6
+A4, A8
+A5, A8
+All shows:
+Movie M1; A2; 120; 12+; 2022; Comedy; A3
+Movie M2; A4; 120; 12+; 2022; Comedy; A3
+Movie M3; A4; 120; 12+; 2022; Comedy; A1; A2
+Movie M4; A8; 120; 12+; 2022; Comedy; A7
+Movie M5; A4; 120; 12+; 2022; Comedy; A3; A5
+Movie M6; A4; 120; 12+; 2022; Comedy; A7; A5
+Movie M7; A6; 120; 12+; 2022; Comedy; A7
+Movie M8; A7; 120; 12+; 2022; Comedy; A6; A3; A5
+Series S1; A4; 120; 12+; 2022; Comedy; A2
+Series S2; A1; 120; 12+; 2022; Comedy; A2; A3
+Series S3; A7; 120; 12+; 2022; Comedy; A1
+Series S4; A1; 120; 12+; 2022; Comedy; A8
+Series S5; A6; 120; 12+; 2022; Comedy; A8
+Series S6; A6; 120; 12+; 2022; Comedy; A5
+Bye!

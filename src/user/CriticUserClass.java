@@ -1,9 +1,14 @@
 package user;
 
+/**
+ * Class for the critic user
+ *
+ * @author Filipe Corista / João Rodrigues
+ */
 public class CriticUserClass extends AbstractOrdinaryUser implements CriticUser {
 
     /**
-     * Creates a new Ordinary User, being Critic or Audience type
+     * Creates a new Critic user
      *
      * @param name name of the user
      */

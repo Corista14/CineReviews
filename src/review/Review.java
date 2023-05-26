@@ -2,6 +2,11 @@ package review;
 
 import user.OrdinaryUser;
 
+/**
+ * Interface to store the behavior of a Review
+ *
+ * @author Filipe Corista / João Rodrigues
+ */
 public interface Review {
 
     /**
@@ -14,7 +19,7 @@ public interface Review {
     /**
      * Gives the score of the review
      *
-     * @return the score fo the review
+     * @return the score of the review
      */
     int getScore();
 
@@ -32,9 +37,17 @@ public interface Review {
      */
     boolean madeByCritic();
 
-    boolean userAlreadyReviewed(OrdinaryUser user);
-
+    /**
+     * Gets the description of the review
+     *
+     * @return the description of the review
+     */
     String getDescription();
 
+    /**
+     * Gets the classification of the review
+     *
+     * @return the classification of the review
+     */
     String getClassification();
 }

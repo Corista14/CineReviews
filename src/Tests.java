@@ -55,6 +55,8 @@ public class Tests {
     @Test public void test08() { test("08_in.txt","08_out.txt"); }
     @Test public void test09() { test("09_in.txt","09_out.txt"); }
     @Test public void test10() { test("10_in.txt","10_out.txt"); }
+    @Test public void test11() { test("11_in.txt","11_out.txt"); }
+    @Test public void test12() { test("12_in.txt","12_out.txt"); }
 
     /**
      * The BASE constant specifies the directory where the test files are located.

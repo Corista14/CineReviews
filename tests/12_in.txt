@@ -1,0 +1,182 @@
+Register admin grogu 1234
+friends
+Artist A1
+Date A1
+Place A1
+friends
+Movie grogu 1234
+Movie M1
+A2
+120
+12+
+2022
+1
+Comedy
+2
+A3
+A5
+friends
+shows
+Series grogu 1234
+Series S1
+A1
+120
+12+
+2022
+1
+Comedy
+1
+A2
+friends
+Movie grogu 1234
+Movie M2
+A4
+120
+12+
+2022
+1
+Comedy
+1
+A2
+friends
+Movie grogu 1234
+Movie M3
+A4
+120
+12+
+2022
+1
+Comedy
+4
+A1
+A2
+A3
+A5
+friends
+Series grogu 1234
+Series S2
+A1
+120
+12+
+2022
+1
+Comedy
+2
+A2
+A3
+friends
+Movie grogu 1234
+Movie M4
+A8
+120
+12+
+2022
+1
+Comedy
+5
+A7
+A5
+A6
+A1
+A2
+shows
+Series grogu 1234
+Series S3
+A7
+120
+12+
+2022
+1
+Comedy
+3
+A8
+A5
+A6
+Series grogu 1234
+Series S4
+A5
+120
+12+
+2022
+1
+Comedy
+3
+A7
+A8
+A6
+Series grogu 1234
+Series S5
+A6
+120
+12+
+2022
+1
+Comedy
+1
+A8
+friends
+Series grogu 1234
+Series S6
+A6
+120
+12+
+2022
+1
+Comedy
+3
+A7
+A8
+A5
+friends
+shows
+Movie grogu 1234
+Movie M5
+A8
+120
+12+
+2022
+1
+Comedy
+1
+A7
+friends
+Movie grogu 1234
+Movie M6
+A8
+120
+12+
+2022
+1
+Comedy
+2
+A7
+A5
+friends
+Movie grogu 1234
+Movie M7
+A6
+120
+12+
+2022
+1
+Comedy
+1
+A7
+friends
+shows
+Movie grogu 1234
+Movie M8
+A7
+120
+12+
+2022
+1
+Comedy
+4
+A6
+A3
+A5
+A2
+friends
+shows
+exit

@@ -1,7 +1,10 @@
 package cinereviews;
 
+import artist.Artist;
 import artist.exceptions.AlreadyHasBioException;
 import artist.exceptions.UnknownArtistException;
+import cinereviews.exceptions.NoArtistException;
+import cinereviews.exceptions.NoCollaborationsException;
 import review.Review;
 import review.exceptions.UserAlreadyReviewedException;
 import show.exceptions.ShowAlreadyExistsException;
@@ -103,35 +106,95 @@ public interface CineReviews {
     boolean addArtistBio(String name, String dateOfBirth, String placeOfBirth) throws AlreadyHasBioException;
 
     /**
-     * Returns the artists date of birth if he has a bio
+     * Lists the bio and credits of an artist
      *
      * @param artistName name of the artist
-     * @return date of birth of the artist
+     * @return the iterator of the bio and credits of an artist
+     * @throws UnknownArtistException exception when there is no artist with the given name
      */
-    String getArtistDateOfBirth(String artistName);
-
-    /**
-     * Returns the artists place of birth if he has a bio
-     *
-     * @param artistName name of the artist
-     * @return place of birth of the artist
-     */
-    String getArtistPlaceOfBirth(String artistName);
-
     Iterator<Show> getArtistCredits(String artistName) throws UnknownArtistException;
 
+    /**
+     * Checks if an artist has a bio
+     *
+     * @param artist name of the artist
+     * @return true if the artist has a bio, false otherwise
+     */
     boolean artistHasBio(String artist);
 
+    /**
+     * Gets the place of birth of a given artist
+     *
+     * @param artist name of the artist
+     * @return the place of birth of a given artist
+     */
     String getPlaceOfBirthOfArtist(String artist);
 
+    /**
+     * Gets the date of birth of a given artist
+     *
+     * @param artist name of the artist
+     * @return the date of birth of a given artist
+     */
     String getDateOfBirthOfArtist(String artist);
 
+    /**
+     * Gets the role of a given artist in a given show
+     *
+     * @param artistName name of the artist
+     * @param show       name of the show that the artist is in
+     * @return the role of a given artist in a given show
+     */
     String getArtistRole(String artistName, String show);
 
+    /**
+     * Adds a review to a show, getting the number of reviews that that show has
+     *
+     * @param username name of the user reviewing the show
+     * @param review   description of the review
+     * @param showName name of the show
+     * @param score    classification of the show
+     * @return the number of reviews that that show has
+     * @throws UnknownUserException         exception when there is no user with the given name
+     * @throws IsAdminException             exception when the user is an admin
+     * @throws UnknownShowException         exception when there is no show with the given name
+     * @throws UserAlreadyReviewedException exception when the user already reviewed the given show
+     */
     int reviewShow(String username, String review, String showName, String score) throws
             UnknownUserException, IsAdminException, UnknownShowException, UserAlreadyReviewedException;
 
+    /**
+     * Lists the reviews of a show
+     *
+     * @param showName name of the show
+     * @return the iterator of reviews of a show
+     * @throws UnknownShowException exception when the there is no show with the given name
+     */
     Iterator<Review> getReviewsOfShow(String showName) throws UnknownShowException;
 
+    /**
+     * Gets the score of a show
+     *
+     * @param showName name of the show
+     * @return the score of a show
+     */
     float getScoreOfShow(String showName);
+
+    /**
+     * Lists shows released on a given year
+     *
+     * @param year year of release of those shows
+     * @return the iterator of shows released on a given year
+     */
+    Iterator<Show> getShowsByYear(int year);
+
+    /**
+     * Lists shows of given genres
+     *
+     * @param genres collection of genres to look for
+     * @return the iterator of shows of given genres
+     */
+    Iterator<Show> getShowsByGenre(Iterator<String> genres);
+    Iterator<Artist> getAllFriends() throws NoArtistException, NoCollaborationsException;
+    Iterator<Artist> getFriendsOf(String name);
 }

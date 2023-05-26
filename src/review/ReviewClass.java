@@ -4,6 +4,11 @@ import user.CriticUser;
 import user.OrdinaryUser;
 import util.Classification;
 
+/**
+ * Class to implement the behavior of a Review
+ *
+ * @author Filipe Corista / João Rodrigues
+ */
 public class ReviewClass implements Review {
 
     private final OrdinaryUser reviewer;
@@ -12,6 +17,13 @@ public class ReviewClass implements Review {
 
     private final String description;
 
+    /**
+     * Creates a new review
+     *
+     * @param reviewer       ordinary user that made the review
+     * @param description    description of the review
+     * @param classification classification of the review (check Classification enum)
+     */
     public ReviewClass(OrdinaryUser reviewer, String description, String classification) {
         this.reviewer = reviewer;
         this.description = description;
@@ -36,11 +48,6 @@ public class ReviewClass implements Review {
     @Override
     public boolean madeByCritic() {
         return reviewer instanceof CriticUser;
-    }
-
-    @Override
-    public boolean userAlreadyReviewed(OrdinaryUser user) {
-        return reviewer.equals(user);
     }
 
     @Override

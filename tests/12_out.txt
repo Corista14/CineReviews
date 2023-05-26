@@ -1,0 +1,108 @@
+User grogu was registered as admin.
+No artists yet!
+A1 bio was created.
+No collaborations yet!
+Movie Movie M1 (2022) was uploaded [3 new artists were created].
+These artists have worked on 1 projects together
+A2 and A3
+A2 and A5
+A3 and A5
+All shows:
+Movie M1; A2; 120; 12+; 2022; Comedy; A3; A5
+Series Series S1 (2022) was uploaded [0 new artists were created].
+These artists have worked on 1 projects together
+A1 and A2
+A2 and A3
+A2 and A5
+A3 and A5
+Movie Movie M2 (2022) was uploaded [1 new artists were created].
+These artists have worked on 1 projects together
+A1 and A2
+A2 and A3
+A2 and A4
+A2 and A5
+A3 and A5
+Movie Movie M3 (2022) was uploaded [0 new artists were created].
+These artists have worked on 2 projects together
+A1 and A2
+A2 and A3
+A2 and A4
+A2 and A5
+A3 and A5
+Series Series S2 (2022) was uploaded [0 new artists were created].
+These artists have worked on 3 projects together
+A1 and A2
+A2 and A3
+Movie Movie M4 (2022) was uploaded [3 new artists were created].
+All shows:
+Movie M1; A2; 120; 12+; 2022; Comedy; A3; A5
+Movie M2; A4; 120; 12+; 2022; Comedy; A2
+Movie M3; A4; 120; 12+; 2022; Comedy; A1; A2; A3
+Movie M4; A8; 120; 12+; 2022; Comedy; A7; A5; A6
+Series S1; A1; 120; 12+; 2022; Comedy; A2
+Series S2; A1; 120; 12+; 2022; Comedy; A2; A3
+Series Series S3 (2022) was uploaded [0 new artists were created].
+Series Series S4 (2022) was uploaded [0 new artists were created].
+Series Series S5 (2022) was uploaded [0 new artists were created].
+These artists have worked on 4 projects together
+A1 and A2
+A6 and A8
+Series Series S6 (2022) was uploaded [0 new artists were created].
+These artists have worked on 5 projects together
+A6 and A8
+All shows:
+Movie M1; A2; 120; 12+; 2022; Comedy; A3; A5
+Movie M2; A4; 120; 12+; 2022; Comedy; A2
+Movie M3; A4; 120; 12+; 2022; Comedy; A1; A2; A3
+Movie M4; A8; 120; 12+; 2022; Comedy; A7; A5; A6
+Series S1; A1; 120; 12+; 2022; Comedy; A2
+Series S2; A1; 120; 12+; 2022; Comedy; A2; A3
+Series S3; A7; 120; 12+; 2022; Comedy; A8; A5; A6
+Series S4; A5; 120; 12+; 2022; Comedy; A7; A8; A6
+Series S5; A6; 120; 12+; 2022; Comedy; A8
+Series S6; A6; 120; 12+; 2022; Comedy; A7; A8; A5
+Movie Movie M5 (2022) was uploaded [0 new artists were created].
+These artists have worked on 5 projects together
+A6 and A8
+A7 and A8
+Movie Movie M6 (2022) was uploaded [0 new artists were created].
+These artists have worked on 6 projects together
+A7 and A8
+Movie Movie M7 (2022) was uploaded [0 new artists were created].
+These artists have worked on 6 projects together
+A7 and A8
+All shows:
+Movie M1; A2; 120; 12+; 2022; Comedy; A3; A5
+Movie M2; A4; 120; 12+; 2022; Comedy; A2
+Movie M3; A4; 120; 12+; 2022; Comedy; A1; A2; A3
+Movie M4; A8; 120; 12+; 2022; Comedy; A7; A5; A6
+Movie M5; A8; 120; 12+; 2022; Comedy; A7
+Movie M6; A8; 120; 12+; 2022; Comedy; A7; A5
+Movie M7; A6; 120; 12+; 2022; Comedy; A7
+Series S1; A1; 120; 12+; 2022; Comedy; A2
+Series S2; A1; 120; 12+; 2022; Comedy; A2; A3
+Series S3; A7; 120; 12+; 2022; Comedy; A8; A5; A6
+Series S4; A5; 120; 12+; 2022; Comedy; A7; A8; A6
+Series S5; A6; 120; 12+; 2022; Comedy; A8
+Series S6; A6; 120; 12+; 2022; Comedy; A7; A8; A5
+Movie Movie M8 (2022) was uploaded [0 new artists were created].
+These artists have worked on 6 projects together
+A5 and A7
+A6 and A7
+A7 and A8
+All shows:
+Movie M1; A2; 120; 12+; 2022; Comedy; A3; A5
+Movie M2; A4; 120; 12+; 2022; Comedy; A2
+Movie M3; A4; 120; 12+; 2022; Comedy; A1; A2; A3
+Movie M4; A8; 120; 12+; 2022; Comedy; A7; A5; A6
+Movie M5; A8; 120; 12+; 2022; Comedy; A7
+Movie M6; A8; 120; 12+; 2022; Comedy; A7; A5
+Movie M7; A6; 120; 12+; 2022; Comedy; A7
+Movie M8; A7; 120; 12+; 2022; Comedy; A6; A3; A5
+Series S1; A1; 120; 12+; 2022; Comedy; A2
+Series S2; A1; 120; 12+; 2022; Comedy; A2; A3
+Series S3; A7; 120; 12+; 2022; Comedy; A8; A5; A6
+Series S4; A5; 120; 12+; 2022; Comedy; A7; A8; A6
+Series S5; A6; 120; 12+; 2022; Comedy; A8
+Series S6; A6; 120; 12+; 2022; Comedy; A7; A8; A5
+Bye!

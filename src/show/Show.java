@@ -86,5 +86,8 @@ public interface Show {
 
     Iterator<Artist> getCast();
 
+    Iterator<Artist> getCastWithDirector();
+
     String getArtistRole(String artist);
+    boolean hasGenre(String genre);
 }

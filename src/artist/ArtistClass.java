@@ -4,29 +4,83 @@ import artist.exceptions.AlreadyHasBioException;
 import show.Show;
 import show.ShowComparatorByYear;
 
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
+/**
+ * Class that handles the Artist behavior
+ *
+ * @author Filipe Corista / João Rodrigues
+ */
 public class ArtistClass implements Artist {
 
-    private String name;
-    private String dateOfBirth;
-    private String placeOfBirth;
-    private boolean hasBio;
-    private Set<Show> shows;
+    /**
+     * String storing the name of the artist
+     */
+    private final String name;
 
+    /**
+     * String storing the date of birth of the artist
+     */
+    private String dateOfBirth;
+
+    /**
+     * String storing the place of birth of the artist
+     */
+    private String placeOfBirth;
+
+    /**
+     * boolean storing true if the artist has a bio, false otherwise
+     */
+    private boolean hasBio;
+
+    /**
+     * Collection of the shows that the artist participated in sorted by year
+     */
+    private final SortedSet<Show> shows;
+
+    /**
+     * Collection of times an artist has worked with this artist.
+     * Artist -> number of times has worked with this artist
+     */
+    private final Map<Artist, Integer> cooperatedTimes;
+
+    /**
+     * Collection of artists this artist has worked with
+     */
+    private final Set<Artist> friends;
+
+    /**
+     * Integer storing the maximum number of times this artist has collaborated with some other artist
+     */
+    private int mostTimesCollaborated;
+
+    /**
+     * Creates a new artist without any bio
+     *
+     * @param name name of the artist
+     */
     public ArtistClass(String name) {
         this.name = name;
         this.hasBio = false;
+        cooperatedTimes = new HashMap<>();
+        friends = new HashSet<>();
         shows = new TreeSet<>(new ShowComparatorByYear());
     }
 
+    /**
+     * Creates a new artist with bio
+     *
+     * @param name         name of the artist
+     * @param dateOfBirth  date of birth of the artist
+     * @param placeOfBirth place of birth of the artist
+     */
     public ArtistClass(String name, String dateOfBirth, String placeOfBirth) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.placeOfBirth = placeOfBirth;
         this.hasBio = true;
+        cooperatedTimes = new HashMap<>();
+        friends = new HashSet<>();
         shows = new TreeSet<>(new ShowComparatorByYear());
     }
 
@@ -68,5 +122,41 @@ public class ArtistClass implements Artist {
     @Override
     public void addShow(Show show) {
         shows.add(show);
+        Iterator<Artist> it = show.getCastWithDirector();
+        while (it.hasNext()) {
+            Artist artist = it.next();
+            if(!artist.equals(this)){
+            if (!cooperatedTimes.containsKey(artist)) {
+                cooperatedTimes.put(artist, 1);
+                if (1 >= mostTimesCollaborated) {
+                    friends.add(artist);
+                    mostTimesCollaborated = 1;
+                }
+            } else {
+                int temp = cooperatedTimes.get(artist) + 1;
+                cooperatedTimes.put(artist, temp);
+                if (temp == mostTimesCollaborated) {
+                    friends.add(artist);
+                }
+                if (temp > mostTimesCollaborated) {
+                    friends.clear();
+                    friends.add(artist);
+                    mostTimesCollaborated = temp;
+                }
+            }
+            }
+        }
     }
+
+    @Override
+    public int getMostTimesWorked() {
+        return mostTimesCollaborated;
+    }
+
+    @Override
+    public Iterator<Artist> getFriends() {
+        return friends.iterator();
+    }
+
+
 }

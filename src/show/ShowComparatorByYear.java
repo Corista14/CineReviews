@@ -2,6 +2,11 @@ package show;
 
 import java.util.Comparator;
 
+/**
+ * Comparator that compares two shows by year of release
+ *
+ * @author Filipe Corista / João Rodrigues
+ */
 public class ShowComparatorByYear implements Comparator<Show> {
 
     @Override

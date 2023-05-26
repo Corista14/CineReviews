@@ -2,6 +2,7 @@ package util;
 
 /**
  * Enum to store the commands of the application
+ *
  * @author Filipe Corista / João Rodrigues
  */
 public enum Command {
@@ -33,6 +34,7 @@ public enum Command {
 
     /**
      * Gets the description of a command
+     *
      * @return the description of a command
      */
     public String getDescription() {

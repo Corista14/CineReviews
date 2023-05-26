@@ -8,6 +8,11 @@ import user.User;
 
 import java.util.*;
 
+/**
+ * Class that implements the behavior of a Show
+ *
+ * @author Filipe Corista / João Rodrigues
+ */
 public abstract class AbstractShow implements Show {
 
     private static final String DIRECTOR = "director";
@@ -20,7 +25,7 @@ public abstract class AbstractShow implements Show {
     private final Map<String, Review> reviews;
     private final Set<Review> sortedReviews;
     private final String title;
-    private final String creatorName;
+    private final Artist creator;
     private final String ageOfCertification;
     private final int yearOfRelease;
     private final List<String> genres;
@@ -31,17 +36,17 @@ public abstract class AbstractShow implements Show {
      * Creates a new show, being Movie or Series
      *
      * @param title              name of the show
-     * @param creatorName        name of the creator of the show
+     * @param creator            creator of the show
      * @param ageOfCertification age of certification of the show
      * @param yearOfRelease      the show's year of release
      * @param genres             a collection of genres of the show
      * @param cast               a collection of the cast of the show
      */
-    public AbstractShow(AdminUser uploader, String title, String creatorName, String ageOfCertification,
+    public AbstractShow(AdminUser uploader, String title, Artist creator, String ageOfCertification,
                         int yearOfRelease, Iterator<String> genres, Iterator<Artist> cast) {
         this.uploader = uploader;
         this.title = title;
-        this.creatorName = creatorName;
+        this.creator = creator;
         this.ageOfCertification = ageOfCertification;
         this.yearOfRelease = yearOfRelease;
         this.genres = new ArrayList<>();
@@ -85,7 +90,7 @@ public abstract class AbstractShow implements Show {
 
     @Override
     public String getDirectorName() {
-        return creatorName;
+        return creator.getName();
     }
 
     @Override
@@ -130,12 +135,29 @@ public abstract class AbstractShow implements Show {
     }
 
     @Override
+    public Iterator<Artist> getCastWithDirector() {
+        List<Artist> directorCast = new ArrayList<>();
+        for(Artist artist: cast) {
+            directorCast.add(artist);
+        }
+        directorCast.add(creator);
+        return directorCast.iterator();
+    }
+
+
+
+    @Override
     public String getArtistRole(String artist) {
-        if (!artist.equals(this.creatorName)) return ACTOR;
+        if (!artist.equals(this.creator.getName())) return ACTOR;
         else {
             if (this instanceof Movie) return DIRECTOR;
             else return CREATOR;
         }
+    }
+
+    @Override
+    public boolean hasGenre(String genre){
+        return genres.contains(genre);
     }
 
     private void addCast(Iterator<Artist> cast) {
@@ -151,5 +173,6 @@ public abstract class AbstractShow implements Show {
             this.genres.add(next);
         }
     }
+
 
 }

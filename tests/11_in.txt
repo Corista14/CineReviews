@@ -1,0 +1,198 @@
+Register admin grogu 1234
+avoiders
+Artist A1
+Date A1
+Place A1
+avoiders
+Artist A2
+Date A2
+Place A2
+avoiders
+Artist A3
+Date A3
+Place A3
+avoiders
+Artist A4
+Date A4
+Place A4
+avoiders
+Movie grogu 1234
+Movie M1
+A2
+120
+12+
+2022
+1
+Comedy
+1
+A3
+Avoiders
+Series grogu 1234
+Series S1
+A4
+120
+12+
+2022
+1
+Comedy
+1
+A2
+avoiders
+Movie grogu 1234
+Movie M2
+A4
+120
+12+
+2022
+1
+Comedy
+1
+A3
+Avoiders
+Movie grogu 1234
+Movie M3
+A4
+120
+12+
+2022
+1
+Comedy
+2
+A1
+A2
+Avoiders
+Series grogu 1234
+Series S2
+A1
+120
+12+
+2022
+1
+Comedy
+2
+A2
+A3
+avoiders
+Artist A5
+Date A5
+Place A5
+avoiders
+Artist A6
+Date A6
+Place A6
+avoiders
+Artist A7
+Date A7
+Place A7
+Artist A8
+Date A8
+Place A8
+avoiders
+Movie grogu 1234
+Movie M4
+A8
+120
+12+
+2022
+1
+Comedy
+1
+A7
+avoiders
+shows
+Series grogu 1234
+Series S3
+A7
+120
+12+
+2022
+1
+Comedy
+1
+A1
+avoiders
+Series grogu 1234
+Series S4
+A1
+120
+12+
+2022
+1
+Comedy
+1
+A8
+Series grogu 1234
+Series S5
+A6
+120
+12+
+2022
+1
+Comedy
+1
+A8
+avoiders
+Series grogu 1234
+Series S6
+A6
+120
+12+
+2022
+1
+Comedy
+1
+A5
+avoiders
+shows
+Movie grogu 1234
+Movie M5
+A4
+120
+12+
+2022
+1
+Comedy
+2
+A3
+A5
+avoiders
+Movie grogu 1234
+Movie M6
+A4
+120
+12+
+2022
+1
+Comedy
+2
+A7
+A5
+avoiders
+Movie grogu 1234
+Movie M7
+A6
+120
+12+
+2022
+1
+Comedy
+1
+A7
+avoiders
+shows
+Movie grogu 1234
+Movie M8
+A7
+120
+12+
+2022
+1
+Comedy
+4
+A6
+A3
+A5
+A2
+avoiders
+shows
+exit

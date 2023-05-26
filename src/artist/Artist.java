@@ -5,6 +5,11 @@ import show.Show;
 
 import java.util.Iterator;
 
+/**
+ * Interface to store the behavior of an Artist
+ *z
+ * @author Filipe Corista / João Rodrigues
+ */
 public interface Artist {
 
     /**
@@ -59,5 +64,17 @@ public interface Artist {
      */
     void addShow(Show show);
 
+    /**
+     * Returns the maximum amount of times that this artist has worked with another
+     *
+     * @return the maximum amount of times that this artist has worked with another
+     */
+    int getMostTimesWorked();
 
+    /**
+     * Gets the iterator of artist that this artist has worked with
+     *
+     * @return the iterator of artist that this artist has worked with
+     */
+    Iterator<Artist> getFriends();
 }
