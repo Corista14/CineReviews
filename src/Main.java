@@ -81,6 +81,9 @@ public class Main {
         executeCommands();
     }
 
+    /**
+     * Executes the commands of the app
+     */
     private static void executeCommands() {
         Scanner in = new Scanner(System.in);
         CineReviews cine = new CineReviewsClass();
@@ -112,37 +115,42 @@ public class Main {
         in.close();
     }
 
+    /**
+     * List the artists that have no common projects
+     *
+     * @param cine object of the system class
+     */
     private static void executeAvoiders(CineReviews cine) {
-        Iterator<Set<Artist>> it = cine.getAvoiders();
-
-        if (!cine.hasArtists()) System.out.println(NO_ARTISTS);
-        else if (!it.hasNext()) System.out.println(SMALL_WORLD);
-        else {
-            System.out.printf(NEVER_WORKED, cine.getLastAvoidersSize());
-            while (it.hasNext()) {
-                Set<Artist> nextSet = it.next();
-                Iterator<Artist> artistIt = nextSet.iterator();
-                StringBuilder cast = getCommaListOfArtists(artistIt, ", ");
-                while (artistIt.hasNext()) {
-                    Artist nextArt = artistIt.next();
-                    cast.append(nextArt.getName());
-                    if (artistIt.hasNext()) cast.append(", ");
-                }
-                System.out.println(cast);
-            }
+        try {
+            Iterator<Set<Artist>> it = cine.getAvoiders();
+            if (!it.hasNext()) System.out.println(SMALL_WORLD);
+            else printAvoiders(cine, it);
+        } catch (NoArtistException e) {
+            System.out.println(NO_ARTISTS);
         }
     }
 
-    private static StringBuilder getCommaListOfArtists(Iterator<Artist> artistIt, String separator) {
-        StringBuilder list = new StringBuilder();
-        while (artistIt.hasNext()) {
-            Artist nextArt = artistIt.next();
-            list.append(nextArt.getName());
-            if (artistIt.hasNext()) list.append(separator);
+    /**
+     * Prints the avoiders
+     *
+     * @param it   iterator of the set of avoiders
+     * @param cine object of the system class
+     */
+    private static void printAvoiders(CineReviews cine, Iterator<Set<Artist>> it) {
+        System.out.printf(NEVER_WORKED, cine.getLastAvoidersSize());
+        while (it.hasNext()) {
+            Set<Artist> nextSet = it.next();
+            Iterator<Artist> artistIt = nextSet.iterator();
+            StringBuilder cast = getCommaListOfArtists(artistIt, ", ");
+            System.out.println(cast);
         }
-        return list;
     }
 
+    /**
+     * List the artists that have more projects together
+     *
+     * @param cine object of the system class
+     */
     private static void executeFriends(CineReviews cine) {
         try {
             Iterator<Artist> allFriendsIt = cine.getAllFriends();
@@ -164,6 +172,12 @@ public class Main {
         }
     }
 
+    /**
+     * Lists shows released on a given year
+     *
+     * @param in   scanner object
+     * @param cine object of the system class
+     */
     private static void executeReleased(Scanner in, CineReviews cine) {
         int year = in.nextInt();
         in.nextLine();
@@ -175,6 +189,12 @@ public class Main {
         }
     }
 
+    /**
+     * Lists shows of given genres
+     *
+     * @param in   scanner object
+     * @param cine object of the system class
+     */
     private static void executeGenre(Scanner in, CineReviews cine) {
         List<String> genres = readSequenceOfStrings(in);
         Iterator<Show> it = cine.getShowsByGenre(genres.iterator());
@@ -185,6 +205,11 @@ public class Main {
         }
     }
 
+    /**
+     * Prints the released shows given the iterator
+     *
+     * @param it iterator of the shows
+     */
     private static void printReleasedShow(Iterator<Show> it) {
         while (it.hasNext()) {
             Show show = it.next();
@@ -197,6 +222,12 @@ public class Main {
         }
     }
 
+    /**
+     * Lists the reviews of a show
+     *
+     * @param in   scanner object
+     * @param cine object of the system class
+     */
     private static void executeReviews(Scanner in, CineReviews cine) {
         String show = in.nextLine().trim();
 
@@ -216,6 +247,12 @@ public class Main {
         }
     }
 
+    /**
+     * Adds a review to a show
+     *
+     * @param in   scanner object
+     * @param cine object of the system class
+     */
     private static void executeReview(Scanner in, CineReviews cine) {
         String username = in.next();
         String show = in.nextLine().trim();
@@ -236,6 +273,12 @@ public class Main {
         }
     }
 
+    /**
+     * Lists the bio and credits of an artist
+     *
+     * @param in   scanner object
+     * @param cine object of the system class
+     */
     private static void executeCredits(Scanner in, CineReviews cine) {
         String artistName = in.nextLine().trim();
 
@@ -259,6 +302,12 @@ public class Main {
         }
     }
 
+    /**
+     * Adds bio information about an artist
+     *
+     * @param in   scanner object
+     * @param cine object of the system class
+     */
     private static void executeArtist(Scanner in, CineReviews cine) {
         String name = in.nextLine().trim();
         String dateOfBirth = in.nextLine();
@@ -274,6 +323,11 @@ public class Main {
         }
     }
 
+    /**
+     * Lists all shows
+     *
+     * @param cine object of the system class
+     */
     private static void executeShows(CineReviews cine) {
         Iterator<Show> it = cine.listAllShows();
         if (!it.hasNext()) System.out.println(NO_SHOWS);
@@ -295,6 +349,12 @@ public class Main {
         }
     }
 
+    /**
+     * Uploads a new series
+     *
+     * @param in   scanner object
+     * @param cine object of the system class
+     */
     private static void executeSeries(Scanner in, CineReviews cine) {
         String adminName = in.next();
         String password = in.next();
@@ -325,6 +385,12 @@ public class Main {
 
     }
 
+    /**
+     * Uploads a new movie
+     *
+     * @param in   scanner object
+     * @param cine object of the system class
+     */
     private static void executeMovie(Scanner in, CineReviews cine) {
         String adminName = in.next();
         String password = in.next();
@@ -354,6 +420,11 @@ public class Main {
         }
     }
 
+    /**
+     * Lists all registered users
+     *
+     * @param cine object of the system class
+     */
     private static void executeUsers(CineReviews cine) {
         Iterator<User> it = cine.getAllUsers();
         if (!it.hasNext()) System.out.println(NO_USERS);
@@ -370,12 +441,17 @@ public class Main {
 
     }
 
+    /**
+     * Registers a user in the system
+     *
+     * @param in   scanner object
+     * @param cine object of the system class
+     */
     private static void executeRegister(Scanner in, CineReviews cine) {
         String type = in.next();
         String username = in.next();
         String password = "";
-        if (type.equals(ADMIN))
-            password = in.next();
+        if (type.equals(ADMIN)) password = in.next();
         in.nextLine();
 
         try {
@@ -388,7 +464,9 @@ public class Main {
         }
     }
 
-
+    /**
+     * Shows the available commands
+     */
     private static void executeHelp() {
         for (Command command : Command.values()) {
             if (command != Command.UNKNOWN) {
@@ -399,6 +477,12 @@ public class Main {
         }
     }
 
+    /**
+     * Reads a command and checks for the Command enum
+     *
+     * @param in scanner object
+     * @return the command name
+     */
     private static Command getCommand(Scanner in) {
         try {
             String command = in.next().toUpperCase();
@@ -408,13 +492,36 @@ public class Main {
         }
     }
 
+    /**
+     * Reads a sequence of Strings returning them in a list
+     *
+     * @param in scanner object
+     * @return list of the read Strings
+     */
     private static List<String> readSequenceOfStrings(Scanner in) {
         List<String> list = new ArrayList<>();
         int n = in.nextInt();
         in.nextLine();
         for (int i = 0; i < n; i++) {
-            String actor = in.nextLine();
-            list.add(actor);
+            String next = in.nextLine();
+            list.add(next);
+        }
+        return list;
+    }
+
+    /**
+     * Gets the comma list of Artists of an iteration
+     *
+     * @param artistIt  iterator of the artists
+     * @param separator separator of the list
+     * @return the comma list of Artists of an iteration
+     */
+    private static StringBuilder getCommaListOfArtists(Iterator<Artist> artistIt, String separator) {
+        StringBuilder list = new StringBuilder();
+        while (artistIt.hasNext()) {
+            Artist nextArt = artistIt.next();
+            list.append(nextArt.getName());
+            if (artistIt.hasNext()) list.append(separator);
         }
         return list;
     }

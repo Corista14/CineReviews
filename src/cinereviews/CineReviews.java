@@ -219,17 +219,11 @@ public interface CineReviews {
      *
      * @return the iterator of the largest list of artists that have never worked together
      */
-    Iterator<Set<Artist>> getAvoiders();
+    Iterator<Set<Artist>> getAvoiders() throws NoArtistException;
 
     /**
-     * Checks if there are any artists in the app
-     * @return true if there are any artists in the app
-     */
-    boolean hasArtists();
-
-    /**
-     * gets the size of the groups that were created in the last avoiders command
-     * returns 0 if avoiders was never called
+     * Gets the size of the groups that were created in the last avoiders command
+     *
      * @return the size of the groups that were created in the last avoiders command or 0 if avoiders was never called
      */
     int getLastAvoidersSize();

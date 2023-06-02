@@ -150,10 +150,21 @@ public class ArtistClass implements Artist {
         return this.getName().compareTo(o.getName());
     }
 
+    /**
+     * Checks if an artist  has the other artist has another in their friend collection
+     * @param artist that will be checkd to see if its on the friend list
+     * @return true if the artist is on the friend list
+     */
     private boolean hasArtistAsFriend(Artist artist) {
         return cooperatedTimes.containsKey(artist);
     }
 
+    /**
+     * Increases the times that the artist has collaborated with another, if the new value
+     * is equal to the most times someone has collaborated they are added to the best friend list
+     * if its greater the best friends list is cleared and they are added to it
+     * @param artist artist wich the colaboration times of will be increased
+     */
     private void updateCooperatedTimes(Artist artist) {
         int temp = cooperatedTimes.get(artist) + COLLAB_INCREMENTER;
         cooperatedTimes.put(artist, temp);
@@ -167,6 +178,11 @@ public class ArtistClass implements Artist {
         }
     }
 
+    /**
+     * Adds a new artist to the friend collection and their  number
+     * of collaborations is set to the initial value
+     * @param artist artist that will be added to the friend list
+     */
     private void addArtistToFriends(Artist artist) {
         cooperatedTimes.put(artist, INITIAL_COLLAB_NUM);
         if (mostTimesCollaborated <= INITIAL_COLLAB_NUM) {

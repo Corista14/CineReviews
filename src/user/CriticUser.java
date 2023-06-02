@@ -1,7 +1,7 @@
 package user;
 
 /**
- * Interface for the critic type user
+ * Tag Interface for the critic type user
  *
  * @author Filipe Corista / João Rodrigues
  */

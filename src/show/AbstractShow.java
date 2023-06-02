@@ -22,14 +22,41 @@ public abstract class AbstractShow implements Show {
      * Map to store the reviews. Username -> Review
      */
     private final Map<String, Review> reviews;
-    private final Set<Review> sortedReviews;
-    private final String title;
-    private final Artist creator;
-    private final String ageOfCertification;
-    private final int yearOfRelease;
-    private final List<String> genres;
-    private final List<Artist> cast;
 
+    /**
+     * Collection of the reviews of this show
+     */
+    private final Set<Review> sortedReviews;
+
+    /**
+     * Title of the show
+     */
+    private final String title;
+
+    /**
+     * Director/Creator of the show
+     */
+    private final Artist creator;
+
+    /**
+     * Age of certification of the show
+     */
+    private final String ageOfCertification;
+
+    /**
+     * Release year of the show
+     */
+    private final int yearOfRelease;
+
+    /**
+     * Collection of genres of the show
+     */
+    private final List<String> genres;
+
+    /**
+     * Collection of the show's cast
+     */
+    private final List<Artist> cast;
 
     /**
      * Creates a new show, being Movie or Series
@@ -149,10 +176,15 @@ public abstract class AbstractShow implements Show {
     }
 
     @Override
-    public boolean hasGenre(String genre){
+    public boolean hasGenre(String genre) {
         return genres.contains(genre);
     }
 
+    /**
+     * Adds the cast of artists to the show
+     *
+     * @param cast iterator containing all the artists that are in the show
+     */
     private void addCast(Iterator<Artist> cast) {
         while (cast.hasNext()) {
             Artist next = cast.next();
@@ -160,6 +192,11 @@ public abstract class AbstractShow implements Show {
         }
     }
 
+    /**
+     * Adds the genres of the show to the genres collection
+     *
+     * @param genres genres that will be added to the collection
+     */
     private void addGenres(Iterator<String> genres) {
         while (genres.hasNext()) {
             String next = genres.next();

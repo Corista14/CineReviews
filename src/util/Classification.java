@@ -18,7 +18,6 @@ public enum Classification {
      */
     private final int value;
 
-
     Classification(int value) {
         this.value = value;
     }

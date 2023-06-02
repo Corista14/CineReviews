@@ -6,6 +6,7 @@ package artist.exceptions;
  * @author Filipe Corista / João Rodrigues
  */
 public class AlreadyHasBioException extends Exception {
+
     public AlreadyHasBioException() {
         super();
     }

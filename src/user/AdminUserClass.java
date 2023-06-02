@@ -5,12 +5,7 @@ package user;
  *
  * @author Filipe Corista / João Rodrigues
  */
-public class AdminUserClass implements AdminUser {
-
-    /**
-     * String storing the name of the user
-     */
-    private final String name;
+public class AdminUserClass extends UserClass implements AdminUser {
 
     /**
      * String storing the password of the user
@@ -29,14 +24,9 @@ public class AdminUserClass implements AdminUser {
      * @param password password of the user
      */
     public AdminUserClass(String name, String password) {
-        this.name = name;
+        super(name);
         this.password = password;
         addedShowAmount = 0;
-    }
-
-    @Override
-    public String getName() {
-        return name;
     }
 
     @Override

@@ -11,10 +11,19 @@ import util.Classification;
  */
 public class ReviewClass implements Review {
 
+    /**
+     * Creator of this review
+     */
     private final OrdinaryUser reviewer;
 
+    /**
+     * Classification of the review
+     */
     private final String classification;
 
+    /**
+     * Description of the review
+     */
     private final String description;
 
     /**

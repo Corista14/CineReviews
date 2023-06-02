@@ -49,12 +49,21 @@ public class CineReviewsClass implements CineReviews {
     /**
      * Collection of shows ordered primarily by score. releaseYear -> collection of shows
      */
-    private final SortedMap<Integer, SortedSet<Show>> showsByYear;
+    private final SortedMap<Integer, Set<Show>> showsByYear;
 
+    /**
+     * Collection of Artists that have never collaborated with the artist whose name is the key
+     */
     private final Map<String, Set<Artist>> avoiders;
 
+    /**
+     *  Number of artist that were added the last time a show was created
+     */
     private int artistAdded;
 
+    /**
+     * Size of the largest avoiders group the last time avoiders was called if it was never called it is 0
+     */
     private int lastAvoidersSize;
 
     /**
@@ -67,7 +76,7 @@ public class CineReviewsClass implements CineReviews {
         avoiders = new HashMap<>();
         showsByYear = new TreeMap<>();
         artistAdded = 0;
-        lastAvoidersSize=0;
+        lastAvoidersSize = 0;
     }
 
     @Override
@@ -215,24 +224,22 @@ public class CineReviewsClass implements CineReviews {
 
     @Override
     public Iterator<Artist> getAllFriends() throws NoArtistException, NoCollaborationsException {
-        if (!artists.isEmpty()) {
-            Set<Artist> temp = new TreeSet<>(new ArtistComparatorByName());
-            int maxFriend = 0;
-            for (Artist artist : artists.values()) {
-                if (artist.getMostTimesWorked() == maxFriend && artist.getMostTimesWorked() > 0) {
-                    temp.add(artist);
-                }
-                if (artist.getMostTimesWorked() > maxFriend) {
-                    temp.clear();
-                    temp.add(artist);
-                    maxFriend = artist.getMostTimesWorked();
-                }
+        if (artists.isEmpty()) throw new NoArtistException();
+
+        Set<Artist> temp = new TreeSet<>(new ArtistComparatorByName());
+        int maxFriend = 0;
+        for (Artist artist : artists.values()) {
+            if (artist.getMostTimesWorked() == maxFriend && artist.getMostTimesWorked() > 0) {
+                temp.add(artist);
             }
-            if (temp.isEmpty()) {
-                throw new NoCollaborationsException();
+            if (artist.getMostTimesWorked() > maxFriend) {
+                temp.clear();
+                temp.add(artist);
+                maxFriend = artist.getMostTimesWorked();
             }
-            return temp.iterator();
-        } else throw new NoArtistException();
+        }
+        if (temp.isEmpty()) throw new NoCollaborationsException();
+        return temp.iterator();
     }
 
     @Override
@@ -247,19 +254,15 @@ public class CineReviewsClass implements CineReviews {
         return temp.iterator();
     }
 
-
-    @Override
-    public boolean hasArtists() {
-        return artists.size() != 0;
-    }
-
     @Override
     public int getLastAvoidersSize() {
         return lastAvoidersSize;
     }
 
     @Override
-    public Iterator<Set<Artist>> getAvoiders() {
+    public Iterator<Set<Artist>> getAvoiders() throws NoArtistException {
+        if (artists.isEmpty()) throw new NoArtistException();
+
         int maxSize = 0;
         Set<Set<Artist>> max_set = new TreeSet<>(new SetArtistComparator());
         for (Artist artist : artists.values()) {
@@ -275,29 +278,51 @@ public class CineReviewsClass implements CineReviews {
                 }
             }
         }
-        lastAvoidersSize=maxSize;
+        lastAvoidersSize = maxSize;
         return max_set.iterator();
     }
 
-
+    /**
+     * Creates a new Admin and adds it to the users collection
+     *
+     * @param name     name of the admin
+     * @param password password to the admin account
+     * @throws UserAlreadyExistsException is thrown if the user already exists inside the collection
+     */
     private void createAdmin(String name, String password) throws UserAlreadyExistsException {
-        if (users.containsKey(name))
-            throw new UserAlreadyExistsException();
+        if (users.containsKey(name)) throw new UserAlreadyExistsException();
         users.put(name, new AdminUserClass(name, password));
     }
 
+    /**
+     * Creates a new Audience user and adds it to the user collection
+     *
+     * @param name name of the user
+     * @throws UserAlreadyExistsException is thrown if the user already exists inside the collection
+     */
     private void createAudience(String name) throws UserAlreadyExistsException {
-        if (users.containsKey(name))
-            throw new UserAlreadyExistsException();
+        if (users.containsKey(name)) throw new UserAlreadyExistsException();
         users.put(name, new AudienceUserClass(name));
     }
 
+    /**
+     * Creates a new Critic user and adds it to the user collection
+     *
+     * @param name namme of the user
+     * @throws UserAlreadyExistsException is thrown if the user already exists inside the collection
+     */
     private void createCritic(String name) throws UserAlreadyExistsException {
-        if (users.containsKey(name))
-            throw new UserAlreadyExistsException();
+        if (users.containsKey(name)) throw new UserAlreadyExistsException();
         users.put(name, new CriticUserClass(name));
     }
 
+    /**
+     * Converts all the Strings in an iterator to artists and adds them to the collection
+     * if they were not already present
+     *
+     * @param it iterator with all the names that will be converted
+     * @return a list with all the names turned into artists
+     */
     private List<Artist> convertToArtist(Iterator<String> it) {
         List<Artist> newArtists = new ArrayList<>();
         while (it.hasNext()) {
@@ -306,7 +331,6 @@ public class CineReviewsClass implements CineReviews {
                 avoiders.put(artist, new TreeSet<>(new ArtistComparatorByName()));
                 this.artists.put(artist, new ArtistClass(artist));
                 for (Artist newArtist : artists.values()) {
-                    newArtist.getName();
                     avoiders.get(newArtist.getName()).add(artists.get(artist));
                 }
                 artistAdded++;
@@ -317,10 +341,18 @@ public class CineReviewsClass implements CineReviews {
         return newArtists;
     }
 
+    /**
+     * Adds the director into the artist collection, for the purposes of the avoiders method
+     * he is removed from the avoiders of everyone in his show, and everyone on his show
+     * are removed form is avoiders
+     *
+     * @param director director that will be added to the artist collection
+     * @param cast     cast of the movie that the director is on
+     */
     private void addDirectorToArtists(String director, List<Artist> cast) {
-        if (!avoiders.containsKey(director)) {
+        if (!avoiders.containsKey(director))
             avoiders.put(director, new TreeSet<>(new ArtistComparatorByName()));
-        }
+
         if (!artists.containsKey(director)) {
             artists.put(director, new ArtistClass(director));
             artistAdded++;
@@ -331,17 +363,35 @@ public class CineReviewsClass implements CineReviews {
         }
     }
 
+    /**
+     * Adds the show to his cast, additionally, removes all the artists on the show from
+     * each other avoiders
+     *
+     * @param cast  list of the cast of the show
+     * @param title title of the show
+     */
     private void addShowToCast(List<Artist> cast, String title) {
         for (Artist next : cast) {
             next.addShow(shows.get(title));
             for (Artist artist : cast) {
                 avoiders.get(next.getName()).remove(artist);
-                avoiders.get(artist.getName()).remove(next);
-
             }
         }
     }
 
+    /**
+     * Adds a new series to the show collection
+     *
+     * @param director         director of the show
+     * @param cast             cast of the show
+     * @param title            title of the show
+     * @param seasonNumber     number of seasons of the show
+     * @param user             admin that added the show
+     * @param ageCertification age certification of the sho
+     * @param releaseYear      release year of the show
+     * @param genres           genres of the show
+     * @return the amount of artists that were created by creating the show
+     */
     private int addSeriesHelper(String director, Iterator<String> cast, String title, int seasonNumber, AdminUser
             user, String ageCertification, int releaseYear, Iterator<String> genres) {
 
@@ -359,6 +409,19 @@ public class CineReviewsClass implements CineReviews {
         return lastAdded;
     }
 
+    /**
+     * Adds a new movie to the show collection
+     *
+     * @param director         director of the show
+     * @param duration         duration of the show
+     * @param cast             cast of the show
+     * @param title            title of the show
+     * @param user             admin that added the show
+     * @param ageCertification age certification of the show
+     * @param releaseYear      release year of the show
+     * @param genres           genres of the show
+     * @return the amount of artists that were created by creating the show
+     */
     private int addMovieHelper(String director, int duration, Iterator<String> cast, String title, AdminUser
             user, String ageCertification, int releaseYear, Iterator<String> genres) {
 
@@ -376,46 +439,88 @@ public class CineReviewsClass implements CineReviews {
         return lastAdded;
     }
 
+    /**
+     * Updates the shows by year
+     *
+     * @param releaseYear release year of the show
+     * @param title       name of the show
+     */
     private void updateShowsByYear(int releaseYear, String title) {
-        if (!showsByYear.containsKey(releaseYear)) {
-            showsByYear.put(releaseYear, new TreeSet<>(new ShowComparatorByScore()));
-        }
+        if (!showsByYear.containsKey(releaseYear))
+            showsByYear.put(releaseYear, new HashSet<>());
         showsByYear.get(releaseYear).add(shows.get(title));
     }
 
+    /**
+     * Gets the avoiders in the app
+     *
+     * @param currentArtist current artist in the recursion
+     * @param artistSet     sets of artist in the recursion
+     * @return the avoiders in the app
+     */
     private Set<TreeSet<Artist>> getAvoidersHelper(Artist currentArtist, Set<Artist> artistSet) {
         Set<Artist> commonArtists = new HashSet<>();
         Set<Artist> avoiders = this.avoiders.get(currentArtist.getName());
 
+        updateCommonArtists(avoiders, artistSet, currentArtist, commonArtists);
+        artistSet.add(currentArtist);
+
+        if (commonArtists.isEmpty()) return getAvoidersEncapsulator(artistSet);
+
+        Set<TreeSet<Artist>> max_set = new HashSet<>();
+        updateMaxSet(commonArtists, artistSet, max_set);
+
+        return max_set;
+    }
+
+    /**
+     * Updates the common artists
+     *
+     * @param avoiders      the list of the current avoiders
+     * @param artistSet     the current set of the recursion
+     * @param currentArtist the current artist of the recursion
+     * @param commonArtists list of the current common artists
+     */
+    private void updateCommonArtists(Set<Artist> avoiders, Set<Artist> artistSet, Artist currentArtist, Set<Artist> commonArtists) {
         for (Artist artist : avoiders) {
             boolean valid = true;
             Iterator<Artist> artistIt = artistSet.iterator();
 
             while (artistIt.hasNext() && valid) {
                 Artist nextArt = artistIt.next();
-                if (!this.avoiders.get(nextArt.getName()).contains(artist)) {
+                if (!this.avoiders.get(nextArt.getName()).contains(artist))
                     valid = false;
-                }
             }
 
             if (valid && currentArtist.getName().compareTo(artist.getName()) > 0) {
                 commonArtists.add(artist);
             }
         }
+    }
 
-        artistSet.add(currentArtist);
+    /**
+     * Gets the encapsulator of the avoiders
+     *
+     * @param artistSet the current set of the recursion
+     * @return the encapsulator of the avoiders
+     */
+    private Set<TreeSet<Artist>> getAvoidersEncapsulator(Set<Artist> artistSet) {
+        Set<TreeSet<Artist>> encapsulator = new HashSet<>();
+        TreeSet<Artist> tree = new TreeSet<>(new ArtistComparatorByName());
+        tree.addAll(artistSet);
+        encapsulator.add(tree);
+        return encapsulator;
+    }
 
-        if (commonArtists.isEmpty()) {
-            Set<TreeSet<Artist>> encapsulator = new HashSet<>();
-            TreeSet<Artist> tree = new TreeSet<>(new ArtistComparatorByName());
-            tree.addAll(artistSet);
-            encapsulator.add(tree);
-            return encapsulator;
-        }
-
+    /**
+     * Updates the max set of avoiders
+     *
+     * @param artistSet     the current set of the recursion
+     * @param commonArtists list of the current common artists
+     * @param max_set       max set of avoiders
+     */
+    private void updateMaxSet(Set<Artist> commonArtists, Set<Artist> artistSet, Set<TreeSet<Artist>> max_set) {
         int maxSize = 0;
-        Set<TreeSet<Artist>> max_set = new HashSet<>();
-
         for (Artist commonArtist : commonArtists) {
             Set<TreeSet<Artist>> avoidersTry = getAvoidersHelper(commonArtist, new HashSet<>(artistSet));
             for (TreeSet<Artist> set : avoidersTry) {
@@ -429,8 +534,6 @@ public class CineReviewsClass implements CineReviews {
                 }
             }
         }
-
-        return max_set;
     }
 
 }
