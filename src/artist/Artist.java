@@ -7,10 +7,10 @@ import java.util.Iterator;
 
 /**
  * Interface to store the behavior of an Artist
- *z
+ *
  * @author Filipe Corista / João Rodrigues
  */
-public interface Artist {
+public interface Artist extends Comparable<Artist> {
 
     /**
      * Gets the artist name

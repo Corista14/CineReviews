@@ -1,4 +1,6 @@
-package review;
+package review.comparators;
+
+import review.Review;
 
 import java.util.Comparator;
 

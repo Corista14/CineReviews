@@ -14,12 +14,13 @@ import user.User;
 import user.exceptions.*;
 
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * An interface for the System CineReviews that manages all the other classes and keeps
  * collections of them allowing the execution of commands
  *
- * @author Filipe Corista / João Rodrigue
+ * @author Filipe Corista / João Rodrigues
  */
 public interface CineReviews {
 
@@ -195,6 +196,41 @@ public interface CineReviews {
      * @return the iterator of shows of given genres
      */
     Iterator<Show> getShowsByGenre(Iterator<String> genres);
+
+    /**
+     * List the artists that have more projects together
+     *
+     * @return the iterator of artists that have more projects together
+     * @throws NoArtistException         exception when there is no artists in the application
+     * @throws NoCollaborationsException exception when there is no collaborations in th application
+     */
     Iterator<Artist> getAllFriends() throws NoArtistException, NoCollaborationsException;
+
+    /**
+     * Gets the list of artists an artist has worked with
+     *
+     * @param name name of the artist
+     * @return the iterator of artists an artist has worked with
+     */
     Iterator<Artist> getFriendsOf(String name);
+
+    /**
+     * Gets the largest list of artists that have never worked together
+     *
+     * @return the iterator of the largest list of artists that have never worked together
+     */
+    Iterator<Set<Artist>> getAvoiders();
+
+    /**
+     * Checks if there are any artists in the app
+     * @return true if there are any artists in the app
+     */
+    boolean hasArtists();
+
+    /**
+     * gets the size of the groups that were created in the last avoiders command
+     * returns 0 if avoiders was never called
+     * @return the size of the groups that were created in the last avoiders command or 0 if avoiders was never called
+     */
+    int getLastAvoidersSize();
 }

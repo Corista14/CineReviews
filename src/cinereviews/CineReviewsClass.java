@@ -2,22 +2,28 @@ package cinereviews;
 
 import artist.Artist;
 import artist.ArtistClass;
-import artist.ArtistComparatorByName;
+import artist.comparators.ArtistComparatorByName;
 import artist.exceptions.AlreadyHasBioException;
 import artist.exceptions.UnknownArtistException;
+import cinereviews.comparators.SetArtistComparator;
 import cinereviews.exceptions.*;
 import review.Review;
 import review.ReviewClass;
 import review.exceptions.UserAlreadyReviewedException;
 import show.*;
+import show.comparators.ShowComparatorByScore;
 import show.exceptions.ShowAlreadyExistsException;
 import show.exceptions.UnknownShowException;
 import user.*;
 import user.exceptions.*;
-import util.Classification;
 
 import java.util.*;
 
+/**
+ * System class of the Cine Reviews application
+ *
+ * @author Filipe Corista / João Rodrigues
+ */
 public class CineReviewsClass implements CineReviews {
 
     // Constants
@@ -28,7 +34,8 @@ public class CineReviewsClass implements CineReviews {
     /**
      * Collection of users in the application. username -> user
      */
-    private final Map<String, User> users;
+    private final SortedMap<String, User> users;
+
     /**
      * Collection of artist in the application. name -> artist
      */
@@ -42,9 +49,13 @@ public class CineReviewsClass implements CineReviews {
     /**
      * Collection of shows ordered primarily by score. releaseYear -> collection of shows
      */
-    private final Map<Integer, SortedSet<Show>> showsByYear;
+    private final SortedMap<Integer, SortedSet<Show>> showsByYear;
+
+    private final Map<String, Set<Artist>> avoiders;
 
     private int artistAdded;
+
+    private int lastAvoidersSize;
 
     /**
      * Creates a new CineReviews app
@@ -53,8 +64,10 @@ public class CineReviewsClass implements CineReviews {
         users = new TreeMap<>();
         artists = new HashMap<>();
         shows = new TreeMap<>();
-        showsByYear = new HashMap<>();
+        avoiders = new HashMap<>();
+        showsByYear = new TreeMap<>();
         artistAdded = 0;
+        lastAvoidersSize=0;
     }
 
     @Override
@@ -106,6 +119,11 @@ public class CineReviewsClass implements CineReviews {
         boolean wasCreated;
         if (!artists.containsKey(name)) {
             artists.put(name, new ArtistClass(name, dateOfBirth, placeOfBirth));
+            avoiders.put(name, new TreeSet<>(new ArtistComparatorByName()));
+            for (Artist artist : artists.values()) {
+                avoiders.get(name).add(artist);
+                avoiders.get(artist.getName()).add(artists.get(name));
+            }
             wasCreated = true;
         } else {
             artists.get(name).addBio(dateOfBirth, placeOfBirth);
@@ -214,9 +232,7 @@ public class CineReviewsClass implements CineReviews {
                 throw new NoCollaborationsException();
             }
             return temp.iterator();
-        } else {
-            throw new NoArtistException();
-        }
+        } else throw new NoArtistException();
     }
 
     @Override
@@ -225,11 +241,42 @@ public class CineReviewsClass implements CineReviews {
         Iterator<Artist> it = artists.get(name).getFriends();
         while (it.hasNext()) {
             Artist artist = it.next();
-            if (name.compareTo(artist.getName()) < 0) {
+            if (name.compareTo(artist.getName()) < 0)
                 temp.add(artist);
-            }
         }
         return temp.iterator();
+    }
+
+
+    @Override
+    public boolean hasArtists() {
+        return artists.size() != 0;
+    }
+
+    @Override
+    public int getLastAvoidersSize() {
+        return lastAvoidersSize;
+    }
+
+    @Override
+    public Iterator<Set<Artist>> getAvoiders() {
+        int maxSize = 0;
+        Set<Set<Artist>> max_set = new TreeSet<>(new SetArtistComparator());
+        for (Artist artist : artists.values()) {
+            Set<TreeSet<Artist>> avoidersTry = getAvoidersHelper(artist, new TreeSet<>(new ArtistComparatorByName()));
+            for (Set<Artist> set : avoidersTry) {
+                if (set.size() == maxSize) {
+                    max_set.add(set);
+                }
+                if (set.size() > maxSize && set.size() != 1) {
+                    maxSize = set.size();
+                    max_set.clear();
+                    max_set.add(set);
+                }
+            }
+        }
+        lastAvoidersSize=maxSize;
+        return max_set.iterator();
     }
 
 
@@ -256,58 +303,134 @@ public class CineReviewsClass implements CineReviews {
         while (it.hasNext()) {
             String artist = it.next();
             if (!this.artists.containsKey(artist)) {
+                avoiders.put(artist, new TreeSet<>(new ArtistComparatorByName()));
                 this.artists.put(artist, new ArtistClass(artist));
+                for (Artist newArtist : artists.values()) {
+                    newArtist.getName();
+                    avoiders.get(newArtist.getName()).add(artists.get(artist));
+                }
                 artistAdded++;
             }
             newArtists.add(this.artists.get(artist));
         }
+
         return newArtists;
     }
 
-    private void addDirectorToArtists(String director) {
+    private void addDirectorToArtists(String director, List<Artist> cast) {
+        if (!avoiders.containsKey(director)) {
+            avoiders.put(director, new TreeSet<>(new ArtistComparatorByName()));
+        }
         if (!artists.containsKey(director)) {
             artists.put(director, new ArtistClass(director));
             artistAdded++;
+        }
+        for (Artist art : cast) {
+            avoiders.get(director).remove(art);
+            avoiders.get(art.getName()).remove(artists.get(director));
         }
     }
 
     private void addShowToCast(List<Artist> cast, String title) {
         for (Artist next : cast) {
             next.addShow(shows.get(title));
+            for (Artist artist : cast) {
+                avoiders.get(next.getName()).remove(artist);
+                avoiders.get(artist.getName()).remove(next);
+
+            }
         }
     }
 
-    private int addSeriesHelper(String director, Iterator<String> cast, String title, int seasonNumber, AdminUser user, String ageCertification, int releaseYear, Iterator<String> genres) {
-        addDirectorToArtists(director);
-        List<Artist> convertedCast = this.convertToArtist(cast);
-        shows.put(title, new SeriesClass(user, title, artists.get(director), seasonNumber, ageCertification, releaseYear, genres, convertedCast.iterator()));
-        addShowToCast(convertedCast, title);
-        if (!showsByYear.containsKey(releaseYear)) {
-            showsByYear.put(releaseYear, new TreeSet<>(new ShowComparatorByScore()));
-        }
-        showsByYear.get(releaseYear).add(shows.get(title));
-        artists.get(director).addShow(shows.get(title));
-        user.incrementPostedShows();
+    private int addSeriesHelper(String director, Iterator<String> cast, String title, int seasonNumber, AdminUser
+            user, String ageCertification, int releaseYear, Iterator<String> genres) {
 
-        int lastAdded = artistAdded;
-        artistAdded = 0;
-        return lastAdded;
-    }
-
-    private int addMovieHelper(String director, int duration, Iterator<String> cast, String title, AdminUser user, String ageCertification, int releaseYear, Iterator<String> genres) {
-        addDirectorToArtists(director);
         List<Artist> convertedCast = this.convertToArtist(cast);
-        shows.put(title, new MovieClass(user, title, artists.get(director), duration, ageCertification, releaseYear, genres, convertedCast.iterator()));
+        addDirectorToArtists(director, convertedCast);
+        shows.put(title, new SeriesClass(title, artists.get(director), seasonNumber, ageCertification, releaseYear, genres, convertedCast.iterator()));
+
         addShowToCast(convertedCast, title);
-        if (!showsByYear.containsKey(releaseYear)) {
-            showsByYear.put(releaseYear, new TreeSet<>(new ShowComparatorByScore()));
-        }
-        showsByYear.get(releaseYear).add(shows.get(title));
+        updateShowsByYear(releaseYear, title);
+
         artists.get(director).addShow(shows.get(title));
         user.incrementPostedShows();
         int lastAdded = artistAdded;
         artistAdded = 0;
         return lastAdded;
+    }
+
+    private int addMovieHelper(String director, int duration, Iterator<String> cast, String title, AdminUser
+            user, String ageCertification, int releaseYear, Iterator<String> genres) {
+
+        List<Artist> convertedCast = this.convertToArtist(cast);
+        addDirectorToArtists(director, convertedCast);
+        shows.put(title, new MovieClass(title, artists.get(director), duration, ageCertification, releaseYear, genres, convertedCast.iterator()));
+
+        addShowToCast(convertedCast, title);
+        updateShowsByYear(releaseYear, title);
+
+        artists.get(director).addShow(shows.get(title));
+        user.incrementPostedShows();
+        int lastAdded = artistAdded;
+        artistAdded = 0;
+        return lastAdded;
+    }
+
+    private void updateShowsByYear(int releaseYear, String title) {
+        if (!showsByYear.containsKey(releaseYear)) {
+            showsByYear.put(releaseYear, new TreeSet<>(new ShowComparatorByScore()));
+        }
+        showsByYear.get(releaseYear).add(shows.get(title));
+    }
+
+    private Set<TreeSet<Artist>> getAvoidersHelper(Artist currentArtist, Set<Artist> artistSet) {
+        Set<Artist> commonArtists = new HashSet<>();
+        Set<Artist> avoiders = this.avoiders.get(currentArtist.getName());
+
+        for (Artist artist : avoiders) {
+            boolean valid = true;
+            Iterator<Artist> artistIt = artistSet.iterator();
+
+            while (artistIt.hasNext() && valid) {
+                Artist nextArt = artistIt.next();
+                if (!this.avoiders.get(nextArt.getName()).contains(artist)) {
+                    valid = false;
+                }
+            }
+
+            if (valid && currentArtist.getName().compareTo(artist.getName()) > 0) {
+                commonArtists.add(artist);
+            }
+        }
+
+        artistSet.add(currentArtist);
+
+        if (commonArtists.isEmpty()) {
+            Set<TreeSet<Artist>> encapsulator = new HashSet<>();
+            TreeSet<Artist> tree = new TreeSet<>(new ArtistComparatorByName());
+            tree.addAll(artistSet);
+            encapsulator.add(tree);
+            return encapsulator;
+        }
+
+        int maxSize = 0;
+        Set<TreeSet<Artist>> max_set = new HashSet<>();
+
+        for (Artist commonArtist : commonArtists) {
+            Set<TreeSet<Artist>> avoidersTry = getAvoidersHelper(commonArtist, new HashSet<>(artistSet));
+            for (TreeSet<Artist> set : avoidersTry) {
+                if (set.size() == maxSize) {
+                    max_set.add(set);
+                }
+                if (set.size() > maxSize && set.size() != 1) {
+                    max_set.clear();
+                    maxSize = set.size();
+                    max_set.add(set);
+                }
+            }
+        }
+
+        return max_set;
     }
 
 }

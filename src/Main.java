@@ -5,8 +5,6 @@ import cinereviews.CineReviews;
 import cinereviews.CineReviewsClass;
 import cinereviews.exceptions.NoArtistException;
 import cinereviews.exceptions.NoCollaborationsException;
-import cinereviews.exceptions.NoShowsThisYearException;
-import cinereviews.exceptions.NoShowsWithGenreException;
 import review.Review;
 import review.exceptions.UserAlreadyReviewedException;
 import show.Movie;
@@ -18,13 +16,9 @@ import user.AdminUser;
 import user.OrdinaryUser;
 import user.User;
 import user.exceptions.*;
-import util.Classification;
 import util.Command;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Entrypoint of the CineReviews application
@@ -34,6 +28,9 @@ import java.util.Scanner;
 public class Main {
 
     private static final String ADMIN = "admin";
+    private static final String MOVIE = "movie";
+    private static final String SERIES = "series";
+
 
     // Constant Message
     private static final String BYE = "Bye!";
@@ -70,10 +67,15 @@ public class Main {
     private static final String RELEASED_HEADER = "Shows released on %d:\n";
     private static final String RELEASED_MOVIE = "Movie %s by %s released on %d [%.1f]\n";
     private static final String RELEASED_SERIES = "Series %s by %s released on %d [%.1f]\n";
-    private static final String NO_ARTISTS = "No artists yet!\n";
+    private static final String NO_ARTISTS = "No artists yet!";
     private static final String NO_COLLABORATIONS = "No collaborations yet!\n";
-    private static final String FRIENDS_HEADER = "These artists have worked on %d projects together\n";
+    private static final String FRIENDS_HEADER = "These artists have worked on %d projects together:\n";
     private static final String FRIENDS_PRINTER = "%s and %s\n";
+    private static final String NO_SHOWS_WITH_CRITERIA = "No show was found within the criteria.";
+    private static final String SHOWS_BY_GENRE = "Search by genre:";
+    private static final String SMALL_WORLD = "It is a small world!";
+    private static final String NEVER_WORKED = "These %d artists never worked together:\n";
+    private static final String PRINT_SHOW = "%s; %s; %d; %s; %d; %s; %s\n";
 
     public static void main(String[] args) {
         executeCommands();
@@ -101,16 +103,49 @@ public class Main {
                 case REVIEWS -> executeReviews(in, cine);
                 case GENRE -> executeGenre(in, cine);
                 case RELEASED -> executeReleased(in, cine);
-                case FRIENDS -> executeFriends(in, cine);
+                case AVOIDERS -> executeAvoiders(cine);
+                case FRIENDS -> executeFriends(cine);
                 default -> System.out.println(UNKNOWN_COMMAND);
             }
         } while (!command.name().equals(Command.EXIT.name()));
+
+        in.close();
     }
 
-    private static void executeFriends(Scanner in, CineReviews cine) {
+    private static void executeAvoiders(CineReviews cine) {
+        Iterator<Set<Artist>> it = cine.getAvoiders();
 
+        if (!cine.hasArtists()) System.out.println(NO_ARTISTS);
+        else if (!it.hasNext()) System.out.println(SMALL_WORLD);
+        else {
+            System.out.printf(NEVER_WORKED, cine.getLastAvoidersSize());
+            while (it.hasNext()) {
+                Set<Artist> nextSet = it.next();
+                Iterator<Artist> artistIt = nextSet.iterator();
+                StringBuilder cast = getCommaListOfArtists(artistIt, ", ");
+                while (artistIt.hasNext()) {
+                    Artist nextArt = artistIt.next();
+                    cast.append(nextArt.getName());
+                    if (artistIt.hasNext()) cast.append(", ");
+                }
+                System.out.println(cast);
+            }
+        }
+    }
+
+    private static StringBuilder getCommaListOfArtists(Iterator<Artist> artistIt, String separator) {
+        StringBuilder list = new StringBuilder();
+        while (artistIt.hasNext()) {
+            Artist nextArt = artistIt.next();
+            list.append(nextArt.getName());
+            if (artistIt.hasNext()) list.append(separator);
+        }
+        return list;
+    }
+
+    private static void executeFriends(CineReviews cine) {
         try {
-            Iterator<Artist> allFriendsIt = cine.getAllFriends();   //TODO:FIX THIS ITS SO SCUFFY
+            Iterator<Artist> allFriendsIt = cine.getAllFriends();
             Artist friend = allFriendsIt.next();
             System.out.printf(FRIENDS_HEADER, friend.getMostTimesWorked());
             allFriendsIt = cine.getAllFriends();
@@ -118,11 +153,12 @@ public class Main {
                 friend = allFriendsIt.next();
                 Iterator<Artist> friendsOf = cine.getFriendsOf(friend.getName());
                 while (friendsOf.hasNext()) {
-                    System.out.printf(FRIENDS_PRINTER, friend.getName(), friendsOf.next().getName());
+                    Artist nextArtist = friendsOf.next();
+                    System.out.printf(FRIENDS_PRINTER, friend.getName(), nextArtist.getName());
                 }
             }
         } catch (NoArtistException e) {
-            System.out.printf(NO_ARTISTS);
+            System.out.println(NO_ARTISTS);
         } catch (NoCollaborationsException e) {
             System.out.printf(NO_COLLABORATIONS);
         }
@@ -135,34 +171,31 @@ public class Main {
         if (!it.hasNext()) System.out.println(NO_SHOWS_IN_YEAR);
         else {
             System.out.printf(RELEASED_HEADER, year);
-            while (it.hasNext()) {
-                Show show = it.next();
-                if (show instanceof Movie) {
-                    System.out.printf(RELEASED_MOVIE, show.getTitle(), show.getDirectorName(), show.getYearOfRelease(), show.getScore());
-                } else {
-                    System.out.printf(RELEASED_SERIES, show.getTitle(), show.getDirectorName(), show.getYearOfRelease(), show.getScore());
-                }
-
-            }
+            printReleasedShow(it);
         }
     }
 
     private static void executeGenre(Scanner in, CineReviews cine) {
         List<String> genres = readSequenceOfStrings(in);
         Iterator<Show> it = cine.getShowsByGenre(genres.iterator());
-        if (!it.hasNext()) System.out.println("No show was found within the criteria.");//uma excessao fica mais giro
+        if (!it.hasNext()) System.out.println(NO_SHOWS_WITH_CRITERIA);
         else {
-            System.out.println("Search by genre:");
-            while (it.hasNext()) {
-                Show next = it.next();
-                if (next instanceof Movie)
-                    System.out.printf(RELEASED_MOVIE, next.getTitle(), next.getDirectorName(), next.getYearOfRelease(), next.getScore());
-                else
-                    System.out.printf(RELEASED_SERIES, next.getTitle(), next.getDirectorName(), next.getYearOfRelease(), next.getScore());
-            }
+            System.out.println(SHOWS_BY_GENRE);
+            printReleasedShow(it);
         }
     }
 
+    private static void printReleasedShow(Iterator<Show> it) {
+        while (it.hasNext()) {
+            Show show = it.next();
+            if (show instanceof Movie) {
+                System.out.printf(RELEASED_MOVIE, show.getTitle(), show.getDirectorName(), show.getYearOfRelease(), show.getScore());
+            } else {
+                System.out.printf(RELEASED_SERIES, show.getTitle(), show.getDirectorName(), show.getYearOfRelease(), show.getScore());
+            }
+
+        }
+    }
 
     private static void executeReviews(Scanner in, CineReviews cine) {
         String show = in.nextLine().trim();
@@ -203,7 +236,6 @@ public class Main {
         }
     }
 
-    // TODO: Refactor this method to look cleaner
     private static void executeCredits(Scanner in, CineReviews cine) {
         String artistName = in.nextLine().trim();
 
@@ -217,10 +249,10 @@ public class Main {
                 Show next = credits.next();
                 if (next instanceof Movie movie)
                     System.out.printf(SHOW_CREDIT, movie.getTitle(), movie.getYearOfRelease(),
-                            cine.getArtistRole(artistName, movie.getTitle()), "movie");
+                            cine.getArtistRole(artistName, movie.getTitle()), MOVIE);
                 else if (next instanceof Series series)
                     System.out.printf(SHOW_CREDIT, series.getTitle(), series.getYearOfRelease(),
-                            cine.getArtistRole(artistName, series.getTitle()), "series");
+                            cine.getArtistRole(artistName, series.getTitle()), SERIES);
             }
         } catch (UnknownArtistException e) {
             System.out.printf(UNKNOWN_ARTIST, artistName);
@@ -234,8 +266,7 @@ public class Main {
 
         try {
             boolean wasCreated = cine.addArtistBio(name, dateOfBirth, placeOfBirth);
-            if (wasCreated)
-                System.out.printf(BIO_CREATED, name);
+            if (wasCreated) System.out.printf(BIO_CREATED, name);
             else
                 System.out.printf(BIO_UPDATED, name);
         } catch (AlreadyHasBioException e) {
@@ -243,8 +274,6 @@ public class Main {
         }
     }
 
-
-    // TODO: Refactor this method to look cleaner
     private static void executeShows(CineReviews cine) {
         Iterator<Show> it = cine.listAllShows();
         if (!it.hasNext()) System.out.println(NO_SHOWS);
@@ -252,19 +281,14 @@ public class Main {
             System.out.println(ALL_SHOWS);
             while (it.hasNext()) {
                 Show next = it.next();
-                StringBuilder cast = new StringBuilder();
                 Iterator<Artist> castIt = next.getCast();
-                while (castIt.hasNext()) {
-                    Artist nextArtist = castIt.next();
-                    cast.append(nextArtist.getName());
-                    if (castIt.hasNext()) cast.append("; ");
-                }
+                StringBuilder cast = getCommaListOfArtists(castIt, "; ");
                 if (next instanceof Series series)
-                    System.out.printf("%s; %s; %d; %s; %d; %s; %s\n", series.getTitle(), series.getDirectorName(),
+                    System.out.printf(PRINT_SHOW, series.getTitle(), series.getDirectorName(),
                             series.getNumberOfSeasons(), series.getAgeCertification(), series.getYearOfRelease(),
                             series.getMainGenre(), cast);
                 else if (next instanceof Movie movie)
-                    System.out.printf("%s; %s; %d; %s; %d; %s; %s\n", movie.getTitle(), movie.getDirectorName(),
+                    System.out.printf(PRINT_SHOW, movie.getTitle(), movie.getDirectorName(),
                             movie.getDuration(), movie.getAgeCertification(), movie.getYearOfRelease(),
                             movie.getMainGenre(), cast);
             }

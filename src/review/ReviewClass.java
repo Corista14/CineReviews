@@ -37,7 +37,9 @@ public class ReviewClass implements Review {
 
     @Override
     public int getScore() {
-        return Classification.valueOf(classification.toUpperCase()).getValue();
+        return Classification
+                .valueOf(classification.toUpperCase())
+                .getValue();
     }
 
     @Override
@@ -59,4 +61,5 @@ public class ReviewClass implements Review {
     public String getClassification() {
         return classification;
     }
+
 }

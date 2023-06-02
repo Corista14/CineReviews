@@ -1,4 +1,6 @@
-package show;
+package show.comparators;
+
+import show.Show;
 
 import java.util.Comparator;
 

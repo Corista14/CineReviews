@@ -19,5 +19,9 @@ public interface OrdinaryUser extends User {
      */
     void incrementReviewCount();
 
+    /**
+     * Gets the type of the user
+     * @return the type of the user
+     */
     String getUserType();
 }

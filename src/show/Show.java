@@ -84,10 +84,33 @@ public interface Show {
      */
     String getMainGenre();
 
+    /**
+     * Gets the cast of the show
+     *
+     * @return the iterator containing the cast of the show
+     */
     Iterator<Artist> getCast();
 
+    /**
+     * Gets the cast of the show, with the director/creator there
+     *
+     * @return the iterator of the cast of the show, with the director/creator there
+     */
     Iterator<Artist> getCastWithDirector();
 
+    /**
+     * Gets the role of an artist (Actor, Director or Creator)
+     *
+     * @param artist name of the artist
+     * @return the role of an artist (Actor, Director or Creator)
+     */
     String getArtistRole(String artist);
+
+    /**
+     * Checks if the show has a genre with given name
+     *
+     * @param genre name of the genre
+     * @return true if the show has a genre with given name, false otherwise
+     */
     boolean hasGenre(String genre);
 }

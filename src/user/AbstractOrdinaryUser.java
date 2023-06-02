@@ -7,6 +7,9 @@ package user;
  */
 public abstract class AbstractOrdinaryUser implements OrdinaryUser {
 
+    private static final String AUDIENCE = "audience";
+    private static final String CRITIC = "critic";
+
     /**
      * Stores the number of reviews of the
      */
@@ -44,7 +47,7 @@ public abstract class AbstractOrdinaryUser implements OrdinaryUser {
 
     @Override
     public String getUserType() {
-        if (this instanceof CriticUser) return "critic";
-        else return "audience";
+        if (this instanceof CriticUser) return CRITIC;
+        else return AUDIENCE;
     }
 }

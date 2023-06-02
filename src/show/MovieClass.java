@@ -1,7 +1,6 @@
 package show;
 
 import artist.Artist;
-import user.AdminUser;
 
 import java.util.Iterator;
 
@@ -20,7 +19,6 @@ public class MovieClass extends AbstractShow implements Movie {
     /**
      * Creates a new series
      *
-     * @param uploader           admin that uploaded the movie
      * @param title              title of the movie
      * @param creator            the director of the movie
      * @param duration           duration, in minutes, of the movie
@@ -29,8 +27,8 @@ public class MovieClass extends AbstractShow implements Movie {
      * @param genres             list of genres in the movie
      * @param cast               list of artists in the movie
      */
-    public MovieClass(AdminUser uploader, String title, Artist creator, int duration, String ageOfCertification, int yearOfRelease, Iterator<String> genres, Iterator<Artist> cast) {
-        super(uploader, title, creator, ageOfCertification, yearOfRelease, genres, cast);
+    public MovieClass(String title, Artist creator, int duration, String ageOfCertification, int yearOfRelease, Iterator<String> genres, Iterator<Artist> cast) {
+        super(title, creator, ageOfCertification, yearOfRelease, genres, cast);
         this.duration = duration;
     }
 

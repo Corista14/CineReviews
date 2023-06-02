@@ -2,8 +2,7 @@ package show;
 
 import artist.Artist;
 import review.Review;
-import review.ReviewComparator;
-import user.AdminUser;
+import review.comparators.ReviewComparator;
 import user.User;
 
 import java.util.*;
@@ -30,7 +29,7 @@ public abstract class AbstractShow implements Show {
     private final int yearOfRelease;
     private final List<String> genres;
     private final List<Artist> cast;
-    private final AdminUser uploader;
+
 
     /**
      * Creates a new show, being Movie or Series
@@ -42,9 +41,8 @@ public abstract class AbstractShow implements Show {
      * @param genres             a collection of genres of the show
      * @param cast               a collection of the cast of the show
      */
-    public AbstractShow(AdminUser uploader, String title, Artist creator, String ageOfCertification,
+    public AbstractShow(String title, Artist creator, String ageOfCertification,
                         int yearOfRelease, Iterator<String> genres, Iterator<Artist> cast) {
-        this.uploader = uploader;
         this.title = title;
         this.creator = creator;
         this.ageOfCertification = ageOfCertification;
@@ -136,15 +134,10 @@ public abstract class AbstractShow implements Show {
 
     @Override
     public Iterator<Artist> getCastWithDirector() {
-        List<Artist> directorCast = new ArrayList<>();
-        for(Artist artist: cast) {
-            directorCast.add(artist);
-        }
+        List<Artist> directorCast = new ArrayList<>(cast);
         directorCast.add(creator);
         return directorCast.iterator();
     }
-
-
 
     @Override
     public String getArtistRole(String artist) {

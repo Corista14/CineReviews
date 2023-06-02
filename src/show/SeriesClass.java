@@ -1,7 +1,6 @@
 package show;
 
 import artist.Artist;
-import user.AdminUser;
 
 import java.util.Iterator;
 
@@ -20,7 +19,6 @@ public class SeriesClass extends AbstractShow implements Series {
     /**
      * Creates a new series
      *
-     * @param uploader           admin that uploaded the series
      * @param title              title of the series
      * @param creator            the director of the series
      * @param seasonNumber       number of seasons in the series
@@ -29,8 +27,8 @@ public class SeriesClass extends AbstractShow implements Series {
      * @param genres             list of genres in the series
      * @param cast               list of artists in the series
      */
-    public SeriesClass(AdminUser uploader, String title, Artist creator, int seasonNumber, String ageOfCertification, int yearOfRelease, Iterator<String> genres, Iterator<Artist> cast) {
-        super(uploader, title, creator, ageOfCertification, yearOfRelease, genres, cast);
+    public SeriesClass(String title, Artist creator, int seasonNumber, String ageOfCertification, int yearOfRelease, Iterator<String> genres, Iterator<Artist> cast) {
+        super(title, creator, ageOfCertification, yearOfRelease, genres, cast);
         this.seasonNumber = seasonNumber;
     }
 

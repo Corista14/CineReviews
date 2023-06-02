@@ -7,24 +7,19 @@ package util;
  */
 public enum Classification {
 
-    EXCELLENT("excellent", 5),
-    GOOD("good", 4),
-    AVERAGE("average", 3),
-    POOR("poor", 2),
-    TERRIBLE("terrible", 1);
+    EXCELLENT(5),
+    GOOD(4),
+    AVERAGE(3),
+    POOR(2),
+    TERRIBLE(1);
 
     /**
      * Integer storing the value of the classification
      */
     private final int value;
 
-    /**
-     * String storing the description of the classification
-     */
-    private final String description;
 
-    Classification(String description, int value) {
-        this.description = description;
+    Classification(int value) {
         this.value = value;
     }
 
@@ -37,12 +32,4 @@ public enum Classification {
         return value;
     }
 
-    /**
-     * Gets the description of the classification
-     *
-     * @return the description of the classification
-     */
-    public String getDescription() {
-        return description;
-    }
 }
